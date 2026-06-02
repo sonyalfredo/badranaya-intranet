@@ -2,18 +2,12 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import Image from "next/image"
 import {
-  LayoutDashboard,
-  Clock,
-  Users,
-  CalendarDays,
-  Receipt,
-  BookOpen,
-  FileText,
-  Settings,
-  LogOut,
+  LayoutDashboard, Clock, Users, CalendarDays,
+  Receipt, BookOpen, FileText, Settings, LogOut,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { cn, getRoleLabel } from "@/lib/utils"
 
 interface NavItem {
   label: string
@@ -33,6 +27,14 @@ const navItems: NavItem[] = [
   { label: "Admin", href: "/admin", icon: Settings, roles: ["ADMIN", "PARTNER"] },
 ]
 
+const ROLE_BADGE: Record<string, string> = {
+  PARTNER: "bg-yellow-500/20 text-yellow-400",
+  ASSOCIATE: "bg-blue-500/20 text-blue-400",
+  PARALEGAL: "bg-purple-500/20 text-purple-400",
+  FINANCE: "bg-green-500/20 text-green-400",
+  ADMIN: "bg-gray-500/20 text-gray-400",
+}
+
 interface SidebarProps {
   userRole: string
   userName: string
@@ -41,7 +43,6 @@ interface SidebarProps {
 
 export default function Sidebar({ userRole, userName, userPosition }: SidebarProps) {
   const pathname = usePathname()
-
   const visibleItems = navItems.filter((item) => item.roles.includes(userRole))
 
   async function handleLogout() {
@@ -49,36 +50,47 @@ export default function Sidebar({ userRole, userName, userPosition }: SidebarPro
     window.location.href = "/login"
   }
 
+  const initials = userName.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()
+
   return (
-    <aside className="w-64 bg-slate-900 text-white flex flex-col min-h-screen">
+    <aside className="w-64 flex flex-col min-h-screen bg-[#0f0f1a] border-r border-white/5">
       {/* Logo */}
-      <div className="px-6 py-5 border-b border-slate-700">
+      <div className="px-5 py-5 border-b border-white/5">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-amber-500 rounded-lg flex items-center justify-center flex-shrink-0">
-            <span className="text-white font-bold text-sm">BP</span>
+          <div className="w-10 h-10 rounded-xl overflow-hidden bg-white flex items-center justify-center flex-shrink-0 shadow-lg">
+            <Image
+              src="/badranaya-logo.png"
+              alt="Badranaya Partnership"
+              width={40}
+              height={40}
+              className="object-contain"
+            />
           </div>
           <div>
-            <p className="font-bold text-sm leading-tight">Badranaya</p>
-            <p className="text-slate-400 text-xs">Partnership</p>
+            <p className="font-bold text-white text-sm leading-tight">Badranaya</p>
+            <p className="text-[11px] text-white/40 tracking-wide uppercase">Partnership</p>
           </div>
         </div>
       </div>
 
-      {/* User info */}
-      <div className="px-6 py-4 border-b border-slate-700">
+      {/* User Card */}
+      <div className="mx-3 my-3 p-3 rounded-xl bg-white/5 border border-white/5">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-slate-600 rounded-full flex items-center justify-center flex-shrink-0">
-            <span className="text-xs font-semibold">{userName.charAt(0)}</span>
+          <div className="w-9 h-9 rounded-xl bg-yellow-500 flex items-center justify-center flex-shrink-0 shadow">
+            <span className="text-xs font-bold text-yellow-950">{initials}</span>
           </div>
           <div className="min-w-0">
-            <p className="text-sm font-medium truncate">{userName}</p>
-            <p className="text-slate-400 text-xs">{userPosition ?? userRole}</p>
+            <p className="text-sm font-semibold text-white truncate leading-tight">{userName}</p>
+            <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${ROLE_BADGE[userRole]}`}>
+              {userPosition ?? getRoleLabel(userRole)}
+            </span>
           </div>
         </div>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-4 space-y-0.5">
+      <nav className="flex-1 px-3 py-2 space-y-0.5">
+        <p className="text-[10px] text-white/25 uppercase tracking-widest px-3 pb-2 pt-1">Navigation</p>
         {visibleItems.map((item) => {
           const Icon = item.icon
           const active = pathname === item.href || pathname.startsWith(item.href + "/")
@@ -87,26 +99,26 @@ export default function Sidebar({ userRole, userName, userPosition }: SidebarPro
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors",
+                "group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all",
                 active
-                  ? "bg-amber-500 text-white font-medium"
-                  : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                  ? "bg-yellow-500 text-yellow-950 shadow-lg shadow-yellow-500/20"
+                  : "text-white/50 hover:bg-white/5 hover:text-white"
               )}
             >
-              <Icon size={18} />
+              <Icon size={17} className={active ? "text-yellow-950" : "text-white/40 group-hover:text-white"} />
               {item.label}
             </Link>
           )
         })}
       </nav>
 
-      {/* Logout */}
-      <div className="px-3 py-4 border-t border-slate-700">
+      {/* Sign Out */}
+      <div className="px-3 py-4 border-t border-white/5">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:bg-slate-800 hover:text-white transition-colors w-full"
+          className="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/40 hover:bg-red-500/10 hover:text-red-400 transition-all w-full"
         >
-          <LogOut size={18} />
+          <LogOut size={17} className="group-hover:text-red-400" />
           Sign Out
         </button>
       </div>
