@@ -294,3 +294,37 @@ model KmsArticle {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
 }
+
+// ─── SECURITY ───────────────────────────────────────────────
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  userEmail  String?
+  userName   String?
+  userRole   String?
+  action     String   // LOGIN, LOGOUT, LOGIN_FAILED, VIEW, CREATE, UPDATE, DELETE, EXPORT, DOWNLOAD
+  resource   String   // time_entry, client, matter, invoice, reimbursement, report, database
+  resourceId String?
+  detail     String?
+  ipAddress  String?
+  userAgent  String?
+  success    Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+}
+
+model LoginAttempt {
+  id        String   @id @default(cuid())
+  email     String
+  ipAddress String
+  success   Boolean
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([ipAddress])
+  @@index([createdAt])
+}
