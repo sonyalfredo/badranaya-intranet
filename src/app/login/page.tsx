@@ -22,71 +22,66 @@ export default function LoginPage() {
     })
     const data = await res.json()
     setLoading(false)
-    if (!res.ok) { setError(data.error ?? "Invalid email or password"); return }
+    if (!res.ok) { setError(data.error ?? "Invalid credentials"); return }
     router.push("/dashboard")
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0f0f1a] p-4">
-      {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen flex items-center justify-center bg-[#0c0c18] px-4">
 
-      <div className="relative w-full max-w-sm">
-        {/* Logo & Brand */}
-        <div className="flex flex-col items-center mb-8">
-          <div className="w-20 h-20 rounded-2xl bg-white flex items-center justify-center shadow-2xl shadow-yellow-500/10 mb-4 p-2">
-            <Image src="/badranaya-logo.png" alt="Badranaya Partnership" width={64} height={64} className="object-contain" />
+      {/* Ambient glows */}
+      <div className="fixed top-[-200px] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/8 rounded-full blur-3xl pointer-events-none" />
+      <div className="fixed bottom-[-200px] left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-yellow-600/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="relative w-full max-w-[360px]">
+
+        {/* Logo */}
+        <div className="flex flex-col items-center mb-10">
+          <div className="w-16 h-16 rounded-2xl bg-white/95 flex items-center justify-center shadow-2xl shadow-yellow-500/20 mb-5 p-2">
+            <Image src="/badranaya-logo.png" alt="Badranaya" width={52} height={52} className="object-contain" />
           </div>
-          <h1 className="text-xl font-bold text-white">Badranaya Partnership</h1>
-          <p className="text-white/40 text-sm mt-1">Employee Intranet Portal</p>
+          <p className="text-white font-semibold text-lg tracking-tight">Badranaya Partnership</p>
+          <p className="text-white/30 text-xs mt-1 tracking-wider uppercase">Employee Portal</p>
         </div>
 
-        {/* Card */}
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-7 backdrop-blur">
-          <h2 className="text-base font-semibold text-white mb-5">Sign in to your account</h2>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-xs font-medium text-white/50 mb-1.5">Email address</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="name@badranaya.com"
-                required
-                className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500/40 transition"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-white/50 mb-1.5">Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-yellow-500/40 focus:border-yellow-500/40 transition"
-              />
-            </div>
+        {/* Form Card */}
+        <div className="bg-white/[0.04] border border-white/8 rounded-2xl p-6 backdrop-blur-sm">
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email address"
+              required
+              autoComplete="email"
+              className="w-full px-4 py-3 bg-white/5 border border-white/8 rounded-xl text-white text-sm placeholder:text-white/25 focus:outline-none focus:ring-1 focus:ring-yellow-500/60 focus:border-yellow-500/40 transition"
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+              autoComplete="current-password"
+              className="w-full px-4 py-3 bg-white/5 border border-white/8 rounded-xl text-white text-sm placeholder:text-white/25 focus:outline-none focus:ring-1 focus:ring-yellow-500/60 focus:border-yellow-500/40 transition"
+            />
 
             {error && (
-              <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm px-4 py-2.5 rounded-xl">
-                {error}
-              </div>
+              <p className="text-red-400 text-xs px-1">{error}</p>
             )}
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-yellow-500 hover:bg-yellow-400 disabled:opacity-50 text-yellow-950 font-bold py-2.5 rounded-xl transition-all shadow-lg shadow-yellow-500/20 hover:shadow-yellow-500/30 hover:-translate-y-0.5 active:translate-y-0 text-sm mt-1"
+              className="w-full bg-yellow-500 hover:bg-yellow-400 active:scale-[0.98] disabled:opacity-40 text-yellow-950 font-bold py-3 rounded-xl transition-all shadow-lg shadow-yellow-500/25 text-sm mt-1"
             >
               {loading ? "Signing in..." : "Sign In"}
             </button>
           </form>
         </div>
 
-        <p className="text-center text-white/20 text-xs mt-6">
-          Having trouble? Contact your IT Administrator
+        <p className="text-center text-white/15 text-xs mt-8">
+          © 2026 Badranaya Partnership · Internal Use Only
         </p>
       </div>
     </div>
