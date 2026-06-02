@@ -28,13 +28,13 @@ interface Matter {
 }
 
 const PRACTICE_AREA_LABELS: Record<string, string> = {
-  LITIGATION: "Litigasi",
-  CORPORATE: "Korporasi",
-  TAX: "Pajak",
-  IP: "Kekayaan Intelektual",
-  EMPLOYMENT: "Ketenagakerjaan",
-  PROPERTY: "Properti",
-  OTHER: "Lainnya",
+  LITIGATION: "Litigation",
+  CORPORATE: "Corporate",
+  TAX: "Tax",
+  IP: "Intellectual Property",
+  EMPLOYMENT: "Employment",
+  PROPERTY: "Property",
+  OTHER: "Other",
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -49,7 +49,7 @@ const STATUS_COLORS: Record<string, string> = {
 const MOCK_CLIENTS: Client[] = [
   { id: "1", companyName: "PT Mowilex Indonesia", picName: "Budi Santoso", picEmail: "budi@mowilex.com", picPhone: "0812-3456-7890", industry: "Manufaktur Cat", status: "ACTIVE", activeMatterCount: 2, totalMatterCount: 5 },
   { id: "2", companyName: "PT Sinar Mas Group", picName: "Dewi Rahayu", picEmail: "dewi@sinarmas.com", picPhone: "0821-9876-5432", industry: "Konglomerasi", status: "ACTIVE", activeMatterCount: 1, totalMatterCount: 3 },
-  { id: "3", companyName: "PT Ciputra Development", picName: "Hendra Wijaya", picEmail: "hendra@ciputra.com", industry: "Properti", status: "ACTIVE", activeMatterCount: 1, totalMatterCount: 1 },
+  { id: "3", companyName: "PT Ciputra Development", picName: "Hendra Wijaya", picEmail: "hendra@ciputra.com", industry: "Property", status: "ACTIVE", activeMatterCount: 1, totalMatterCount: 1 },
   { id: "4", companyName: "CV Berkah Mandiri", picName: "Siti Aminah", picPhone: "0878-1234-5678", industry: "Perdagangan", status: "PROSPECT", activeMatterCount: 0, totalMatterCount: 0 },
   { id: "5", companyName: "PT Garuda Emas Tbk", picName: "Ronny Halim", picEmail: "ronny@garudaemas.com", industry: "Pertambangan", status: "INACTIVE", activeMatterCount: 0, totalMatterCount: 2 },
 ]
@@ -64,7 +64,7 @@ const MOCK_MATTERS: Record<string, Matter[]> = {
     { id: "4", matterCode: "BP-2026-002", matterName: "Akuisisi PT Maju Bersama", practiceArea: "CORPORATE", status: "ACTIVE", lawyerName: "Sony Alfredo", openedAt: "2026-03-01" },
   ],
   "3": [
-    { id: "5", matterCode: "BP-2026-003", matterName: "Due Diligence Properti Surabaya", practiceArea: "PROPERTY", status: "ACTIVE", lawyerName: "Andi Saputra", openedAt: "2026-04-12" },
+    { id: "5", matterCode: "BP-2026-003", matterName: "Due Diligence Property Surabaya", practiceArea: "PROPERTY", status: "ACTIVE", lawyerName: "Andi Saputra", openedAt: "2026-04-12" },
   ],
 }
 
@@ -107,15 +107,15 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Klien & Matter</h1>
-          <p className="text-gray-500 text-sm mt-0.5">Database klien dan pengelolaan perkara</p>
+          <h1 className="text-2xl font-bold text-gray-900">Clients & Matters</h1>
+          <p className="text-gray-500 text-sm mt-0.5">Client database and matter management</p>
         </div>
         {canEdit && (
           <button
             onClick={() => setShowNewClientForm(true)}
             className="flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition"
           >
-            <Plus size={16} /> Tambah Klien
+            <Plus size={16} /> Add Client
           </button>
         )}
       </div>
@@ -130,7 +130,7 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Cari klien atau PIC..."
+                placeholder="Search clients or contact......"
                 className="w-full pl-9 pr-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
             </div>
@@ -139,10 +139,10 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
               onChange={(e) => setStatusFilter(e.target.value)}
               className="text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
             >
-              <option value="">Semua Status</option>
-              <option value="ACTIVE">Aktif</option>
-              <option value="PROSPECT">Prospek</option>
-              <option value="INACTIVE">Tidak Aktif</option>
+              <option value="">All Statuses</option>
+              <option value="ACTIVE">Active</option>
+              <option value="PROSPECT">Prospect</option>
+              <option value="INACTIVE">Inactive</option>
             </select>
           </div>
 
@@ -150,16 +150,16 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
           {showNewClientForm && (
             <div className="bg-white rounded-xl border border-amber-200 p-5 mb-4 shadow-sm">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-800">Tambah Klien Baru</h3>
+                <h3 className="font-semibold text-gray-800">Add New Client</h3>
                 <button onClick={() => setShowNewClientForm(false)} className="text-gray-400 hover:text-gray-600"><X size={18} /></button>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { label: "Nama Perusahaan *", key: "companyName", placeholder: "PT Contoh Indonesia" },
-                  { label: "Nama PIC *", key: "picName", placeholder: "Nama Contact Person" },
-                  { label: "Email PIC", key: "picEmail", placeholder: "email@perusahaan.com" },
-                  { label: "Telepon PIC", key: "picPhone", placeholder: "0812-xxxx-xxxx" },
-                  { label: "Industri", key: "industry", placeholder: "Manufaktur, Properti, dll" },
+                  { label: "Company Name *", key: "companyName", placeholder: "PT Contoh Indonesia" },
+                  { label: "Contact Person *", key: "picName", placeholder: "Nama Contact Person" },
+                  { label: "Contact Email", key: "picEmail", placeholder: "email@perusahaan.com" },
+                  { label: "Contact Phone", key: "picPhone", placeholder: "0812-xxxx-xxxx" },
+                  { label: "Industry", key: "industry", placeholder: "Manufaktur, Property, dll" },
                 ].map(({ label, key, placeholder }) => (
                   <div key={key}>
                     <label className="block text-xs font-medium text-gray-600 mb-1">{label}</label>
@@ -172,18 +172,18 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
                   </div>
                 ))}
                 <div className="col-span-2">
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Catatan</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Notes</label>
                   <textarea
                     value={clientForm.notes}
                     onChange={(e) => setClientForm((f) => ({ ...f, notes: e.target.value }))}
                     rows={2}
-                    placeholder="Catatan tambahan..."
+                    placeholder="Notes tambahan..."
                     className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none"
                   />
                 </div>
               </div>
               <button onClick={handleAddClient} className="mt-4 bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition">
-                Simpan Klien
+                Save Client
               </button>
             </div>
           )}
@@ -214,11 +214,11 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
                   </div>
                   <div className="flex flex-col items-end gap-2 ml-3">
                     <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[client.status]}`}>
-                      {client.status === "ACTIVE" ? "Aktif" : client.status === "PROSPECT" ? "Prospek" : "Non-Aktif"}
+                      {client.status === "ACTIVE" ? "Active" : client.status === "PROSPECT" ? "Prospect" : "Non-Active"}
                     </span>
                     <div className="flex items-center gap-1 text-xs text-gray-400">
                       <Briefcase size={11} />
-                      <span>{client.activeMatterCount} aktif / {client.totalMatterCount} total</span>
+                      <span>{client.activeMatterCount} active / {client.totalMatterCount} total</span>
                     </div>
                     <ChevronRight size={16} className={`text-gray-400 transition-transform ${selectedClient?.id === client.id ? "rotate-90" : ""}`} />
                   </div>
@@ -235,7 +235,7 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
               <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
                 <div>
                   <h2 className="font-semibold text-gray-800">{selectedClient.companyName}</h2>
-                  <p className="text-xs text-gray-500 mt-0.5">Daftar Matter / Perkara</p>
+                  <p className="text-xs text-gray-500 mt-0.5">Matter List</p>
                 </div>
                 <div className="flex gap-2">
                   {canEdit && (
@@ -243,7 +243,7 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
                       onClick={() => setShowNewMatterForm(true)}
                       className="flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-white text-xs font-medium px-3 py-1.5 rounded-lg transition"
                     >
-                      <Plus size={13} /> Matter Baru
+                      <Plus size={13} /> New Matter
                     </button>
                   )}
                   <button onClick={() => setSelectedClient(null)} className="text-gray-400 hover:text-gray-600">
@@ -272,7 +272,7 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
                     </div>
                   )}
                   <div>
-                    <p className="text-xs text-gray-500">Industri</p>
+                    <p className="text-xs text-gray-500">Industry</p>
                     <p className="font-medium text-gray-700">{selectedClient.industry ?? "—"}</p>
                   </div>
                 </div>
@@ -282,14 +282,14 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
               {showNewMatterForm && (
                 <div className="px-5 py-4 bg-amber-50 border-b border-amber-200">
                   <div className="flex items-center justify-between mb-3">
-                    <h4 className="font-medium text-gray-800 text-sm">Matter Baru</h4>
+                    <h4 className="font-medium text-gray-800 text-sm">New Matter</h4>
                     <button onClick={() => setShowNewMatterForm(false)} className="text-gray-400"><X size={16} /></button>
                   </div>
                   <div className="space-y-3">
                     <input
                       value={matterForm.matterName}
                       onChange={(e) => setMatterForm((f) => ({ ...f, matterName: e.target.value }))}
-                      placeholder="Nama Matter / Perkara"
+                      placeholder="Matter Name"
                       className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
                     />
                     <select
@@ -305,11 +305,11 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
                       value={matterForm.description}
                       onChange={(e) => setMatterForm((f) => ({ ...f, description: e.target.value }))}
                       rows={2}
-                      placeholder="Deskripsi singkat..."
+                      placeholder="Brief description..."
                       className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none"
                     />
                     <button className="w-full bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium py-2 rounded-lg transition">
-                      Buat Matter
+                      Create Matter
                     </button>
                   </div>
                 </div>
@@ -318,7 +318,7 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
               {/* Matter List */}
               <div className="divide-y divide-gray-50 max-h-96 overflow-y-auto">
                 {matters.length === 0 ? (
-                  <div className="px-5 py-8 text-center text-gray-400 text-sm">Belum ada matter untuk klien ini</div>
+                  <div className="px-5 py-8 text-center text-gray-400 text-sm">No matters found for this client</div>
                 ) : (
                   matters.map((matter) => (
                     <div key={matter.id} className="px-5 py-4 hover:bg-gray-50 transition-colors">
@@ -333,11 +333,11 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
                             <span className="text-xs text-gray-400">{matter.lawyerName}</span>
                           </div>
                           <p className="text-xs text-gray-400 mt-1">
-                            Dibuka: {new Date(matter.openedAt).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
+                            Opened: {new Date(matter.openedAt).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
                           </p>
                         </div>
                         <span className={`text-xs px-2 py-0.5 rounded-full font-medium ml-3 ${STATUS_COLORS[matter.status]}`}>
-                          {matter.status === "ACTIVE" ? "Aktif" : matter.status === "CLOSED" ? "Selesai" : matter.status}
+                          {matter.status === "ACTIVE" ? "Active" : matter.status === "CLOSED" ? "Closed" : matter.status}
                         </span>
                       </div>
                     </div>

@@ -34,12 +34,12 @@ interface Invoice {
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
-  transport: "Transportasi",
-  leges: "Biaya Leges / PNBP",
-  courier: "Kurir / Pengiriman",
-  entertainment: "Entertainment Klien",
-  accommodation: "Akomodasi",
-  other: "Lainnya",
+  transport: "Transportation",
+  leges: "Court Fees / PNBP",
+  courier: "Courier / Delivery",
+  entertainment: "Client Entertainment",
+  accommodation: "Accommodation",
+  other: "Other",
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -53,13 +53,13 @@ const STATUS_COLORS: Record<string, string> = {
 }
 
 const STATUS_LABELS: Record<string, string> = {
-  PENDING: "Menunggu",
-  APPROVED: "Disetujui",
-  REJECTED: "Ditolak",
-  PAID: "Dibayar",
+  PENDING: "Pending",
+  APPROVED: "Approved",
+  REJECTED: "Rejected",
+  PAID: "Paid",
   DRAFT: "Draft",
-  SENT: "Terkirim",
-  OVERDUE: "Jatuh Tempo",
+  SENT: "Sent",
+  OVERDUE: "Due Date",
 }
 
 const MOCK_REIMBURSEMENTS: Reimbursement[] = [
@@ -159,31 +159,31 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Keuangan</h1>
-          <p className="text-gray-500 text-sm mt-0.5">Reimbursement dan monitoring invoice klien</p>
+          <h1 className="text-2xl font-bold text-gray-900">Finance</h1>
+          <p className="text-gray-500 text-sm mt-0.5">Expense reimbursements and client invoice tracking</p>
         </div>
         {canSubmitReimburse && tab === "reimbursement" && (
           <button onClick={() => setShowReimburseForm(true)}
             className="flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition">
-            <Plus size={16} /> Ajukan Reimburse
+            <Plus size={16} /> Submit Expense
           </button>
         )}
         {isManager && tab === "invoice" && (
           <button onClick={() => setShowInvoiceForm(true)}
             className="flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition">
-            <Plus size={16} /> Buat Invoice
+            <Plus size={16} /> Create Invoice
           </button>
         )}
       </div>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <SummaryCard icon={Receipt} label="Reimburse Pending" value={formatCurrency(totalPending)} sub={`${totalPendingCount} pengajuan`} color="yellow" />
+        <SummaryCard icon={Receipt} label="Pending Reimbursements" value={formatCurrency(totalPending)} sub={`${totalPendingCount} requests`} color="yellow" />
         {canViewInvoice && (
           <>
-            <SummaryCard icon={FileText} label="Invoice Outstanding" value={formatCurrency(invoiceOutstanding)} sub={`${invoiceOverdueCount} overdue`} color="blue" />
-            <SummaryCard icon={TrendingUp} label="Sudah Dibayar" value={formatCurrency(invoicePaidMonth)} sub="Total terbayar" color="green" />
-            <SummaryCard icon={AlertCircle} label="Invoice Overdue" value={String(invoiceOverdueCount)} sub="Perlu tindak lanjut" color="red" />
+            <SummaryCard icon={FileText} label="Outstanding Invoices" value={formatCurrency(invoiceOutstanding)} sub={`${invoiceOverdueCount} overdue`} color="blue" />
+            <SummaryCard icon={TrendingUp} label="Total Collected" value={formatCurrency(invoicePaidMonth)} sub="Total terbayar" color="green" />
+            <SummaryCard icon={AlertCircle} label="Overdue Invoices" value={String(invoiceOverdueCount)} sub="Needs follow-up" color="red" />
           </>
         )}
       </div>
@@ -203,44 +203,44 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
           {showReimburseForm && (
             <div className="bg-white rounded-xl border border-amber-200 p-5 mb-4 shadow-sm">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-800">Pengajuan Reimbursement</h3>
+                <h3 className="font-semibold text-gray-800">Expense Reimbursement</h3>
                 <button onClick={() => setShowReimburseForm(false)} className="text-gray-400 hover:text-gray-600"><X size={18} /></button>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Kategori *</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Category *</label>
                   <select value={reimburseForm.category} onChange={(e) => setReimburseForm((f) => ({ ...f, category: e.target.value }))}
                     className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500">
                     {Object.entries(CATEGORY_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Jumlah (Rp) *</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Amount (IDR) *</label>
                   <input type="number" value={reimburseForm.amount} onChange={(e) => setReimburseForm((f) => ({ ...f, amount: e.target.value }))}
                     placeholder="150000"
                     className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Kode Matter (opsional)</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Matter Code (optional)</label>
                   <input value={reimburseForm.matterCode} onChange={(e) => setReimburseForm((f) => ({ ...f, matterCode: e.target.value }))}
                     placeholder="BP-2026-001"
                     className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500" />
                 </div>
                 <div className="flex items-end">
                   <button className="w-full flex items-center justify-center gap-2 border border-gray-300 text-gray-600 text-sm py-2 rounded-lg hover:bg-gray-50 transition">
-                    <Upload size={15} /> Upload Kuitansi
+                    <Upload size={15} /> Upload Receipt
                   </button>
                 </div>
                 <div className="col-span-2">
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Keterangan *</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Description *</label>
                   <textarea value={reimburseForm.description} onChange={(e) => setReimburseForm((f) => ({ ...f, description: e.target.value }))}
-                    rows={3} placeholder="Jelaskan keperluan pengeluaran secara spesifik..."
+                    rows={3} placeholder="Describe the expense in detail..."
                     className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 resize-none" />
                 </div>
               </div>
               <button onClick={handleAddReimburse}
                 className="mt-4 flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition">
-                <Check size={16} /> Kirim Pengajuan
+                <Check size={16} /> Submit Request
               </button>
             </div>
           )}
@@ -250,7 +250,7 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
             {["", "PENDING", "APPROVED", "PAID", "REJECTED"].map((s) => (
               <button key={s} onClick={() => setStatusFilter(s)}
                 className={`text-xs px-3 py-1.5 rounded-full font-medium transition ${statusFilter === s ? "bg-slate-800 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
-                {s === "" ? "Semua" : STATUS_LABELS[s]}
+                {s === "" ? "All" : STATUS_LABELS[s]}
               </button>
             ))}
           </div>
@@ -286,18 +286,18 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
                       <div className="flex gap-2">
                         <button onClick={() => handleReimburseAction(r.id, "approve")}
                           className="text-xs bg-green-100 text-green-700 hover:bg-green-200 px-3 py-1 rounded-full font-medium transition">
-                          Setuju
+                          Approve
                         </button>
                         <button onClick={() => handleReimburseAction(r.id, "reject")}
                           className="text-xs bg-red-100 text-red-700 hover:bg-red-200 px-3 py-1 rounded-full font-medium transition">
-                          Tolak
+                          Reject
                         </button>
                       </div>
                     )}
                     {isManager && r.status === "APPROVED" && (
                       <button onClick={() => handleReimburseAction(r.id, "pay")}
                         className="text-xs bg-blue-100 text-blue-700 hover:bg-blue-200 px-3 py-1 rounded-full font-medium transition">
-                        Tandai Dibayar
+                        Mark as Paid
                       </button>
                     )}
                   </div>
@@ -318,36 +318,36 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
           {showInvoiceForm && (
             <div className="bg-white rounded-xl border border-amber-200 p-5 mb-4 shadow-sm">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-800">Buat Invoice Baru</h3>
+                <h3 className="font-semibold text-gray-800">New Invoice</h3>
                 <button onClick={() => setShowInvoiceForm(false)} className="text-gray-400 hover:text-gray-600"><X size={18} /></button>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Kode Matter *</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Matter Code *</label>
                   <input value={invoiceForm.matterId} onChange={(e) => setInvoiceForm((f) => ({ ...f, matterId: e.target.value }))}
                     placeholder="BP-2026-001"
                     className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Jumlah (Rp) *</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Amount (IDR) *</label>
                   <input type="number" value={invoiceForm.amount} onChange={(e) => setInvoiceForm((f) => ({ ...f, amount: e.target.value }))}
                     placeholder="50000000"
                     className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Jatuh Tempo</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Due Date</label>
                   <input type="date" value={invoiceForm.dueDate} onChange={(e) => setInvoiceForm((f) => ({ ...f, dueDate: e.target.value }))}
                     className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500" />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-600 mb-1">Catatan</label>
                   <input value={invoiceForm.notes} onChange={(e) => setInvoiceForm((f) => ({ ...f, notes: e.target.value }))}
-                    placeholder="Opsional"
+                    placeholder="Optional"
                     className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500" />
                 </div>
               </div>
               <button className="mt-4 flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition">
-                <Check size={16} /> Buat Invoice
+                <Check size={16} /> Create Invoice
               </button>
             </div>
           )}
@@ -357,7 +357,7 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
             {["", "DRAFT", "SENT", "PAID", "OVERDUE"].map((s) => (
               <button key={s} onClick={() => setStatusFilter(s)}
                 className={`text-xs px-3 py-1.5 rounded-full font-medium transition ${statusFilter === s ? "bg-slate-800 text-white" : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50"}`}>
-                {s === "" ? "Semua" : STATUS_LABELS[s]}
+                {s === "" ? "All" : STATUS_LABELS[s]}
               </button>
             ))}
           </div>
@@ -371,7 +371,7 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
                     <th className="px-5 py-3 text-left">No. Invoice</th>
                     <th className="px-5 py-3 text-left">Klien / Matter</th>
                     <th className="px-5 py-3 text-right">Jumlah</th>
-                    <th className="px-5 py-3 text-center">Jatuh Tempo</th>
+                    <th className="px-5 py-3 text-center">Due Date</th>
                     <th className="px-5 py-3 text-center">Status</th>
                     <th className="px-5 py-3 text-center">Aksi</th>
                   </tr>
@@ -413,18 +413,18 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
                           {inv.status === "SENT" && (
                             <button onClick={() => handleInvoiceStatus(inv.id, "PAID")}
                               className="text-xs bg-green-100 text-green-700 hover:bg-green-200 px-2.5 py-1 rounded-full font-medium transition">
-                              Tandai Lunas
+                              Mark as Paid
                             </button>
                           )}
                           {inv.status === "OVERDUE" && (
                             <button onClick={() => handleInvoiceStatus(inv.id, "PAID")}
                               className="text-xs bg-green-100 text-green-700 hover:bg-green-200 px-2.5 py-1 rounded-full font-medium transition">
-                              Tandai Lunas
+                              Mark as Paid
                             </button>
                           )}
                           {inv.status === "PAID" && inv.paidAt && (
                             <span className="text-xs text-gray-400">
-                              Lunas {new Date(inv.paidAt).toLocaleDateString("id-ID", { day: "numeric", month: "short" })}
+                              Paid on {new Date(inv.paidAt).toLocaleDateString("id-ID", { day: "numeric", month: "short" })}
                             </span>
                           )}
                         </div>
