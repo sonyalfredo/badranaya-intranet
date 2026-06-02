@@ -27,26 +27,25 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0c0c18] px-4">
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(135deg, #0c0c18 0%, #111128 50%, #0a0a14 100%)", padding: "1rem" }}>
 
-      {/* Ambient glows */}
-      <div className="fixed top-[-200px] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-500/8 rounded-full blur-3xl pointer-events-none" />
-      <div className="fixed bottom-[-200px] left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-yellow-600/5 rounded-full blur-3xl pointer-events-none" />
+      {/* Glow top */}
+      <div style={{ position: "fixed", top: "-150px", left: "50%", transform: "translateX(-50%)", width: "500px", height: "500px", background: "radial-gradient(circle, rgba(212,160,23,0.12) 0%, transparent 70%)", pointerEvents: "none", borderRadius: "50%" }} />
 
-      <div className="relative w-full max-w-[360px]">
+      <div style={{ width: "100%", maxWidth: "340px", position: "relative" }}>
 
-        {/* Logo */}
-        <div className="flex flex-col items-center mb-10">
-          <div className="w-16 h-16 rounded-2xl bg-white/95 flex items-center justify-center shadow-2xl shadow-yellow-500/20 mb-5 p-2">
-            <Image src="/badranaya-logo.png" alt="Badranaya" width={52} height={52} className="object-contain" />
+        {/* Logo & Brand */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "2rem" }}>
+          <div style={{ width: "68px", height: "68px", borderRadius: "18px", background: "white", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 20px 60px rgba(212,160,23,0.25)", marginBottom: "1.25rem", padding: "8px" }}>
+            <Image src="/badranaya-logo.png" alt="Badranaya" width={52} height={52} style={{ objectFit: "contain" }} />
           </div>
-          <p className="text-white font-semibold text-lg tracking-tight">Badranaya Partnership</p>
-          <p className="text-white/30 text-xs mt-1 tracking-wider uppercase">Employee Portal</p>
+          <p style={{ color: "white", fontWeight: 700, fontSize: "1.1rem", letterSpacing: "-0.02em", margin: 0 }}>Badranaya Partnership</p>
+          <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.7rem", marginTop: "0.25rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>Employee Portal</p>
         </div>
 
-        {/* Form Card */}
-        <div className="bg-white/[0.04] border border-white/8 rounded-2xl p-6 backdrop-blur-sm">
-          <form onSubmit={handleSubmit} className="space-y-3">
+        {/* Card */}
+        <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "20px", padding: "1.5rem", backdropFilter: "blur(12px)" }}>
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
             <input
               type="email"
               value={email}
@@ -54,7 +53,7 @@ export default function LoginPage() {
               placeholder="Email address"
               required
               autoComplete="email"
-              className="w-full px-4 py-3 bg-white/5 border border-white/8 rounded-xl text-white text-sm placeholder:text-white/25 focus:outline-none focus:ring-1 focus:ring-yellow-500/60 focus:border-yellow-500/40 transition"
+              style={{ width: "100%", padding: "0.8rem 1rem", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "12px", color: "white", fontSize: "0.875rem", outline: "none", boxSizing: "border-box" }}
             />
             <input
               type="password"
@@ -63,24 +62,24 @@ export default function LoginPage() {
               placeholder="Password"
               required
               autoComplete="current-password"
-              className="w-full px-4 py-3 bg-white/5 border border-white/8 rounded-xl text-white text-sm placeholder:text-white/25 focus:outline-none focus:ring-1 focus:ring-yellow-500/60 focus:border-yellow-500/40 transition"
+              style={{ width: "100%", padding: "0.8rem 1rem", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "12px", color: "white", fontSize: "0.875rem", outline: "none", boxSizing: "border-box" }}
             />
 
             {error && (
-              <p className="text-red-400 text-xs px-1">{error}</p>
+              <p style={{ color: "#f87171", fontSize: "0.75rem", margin: 0, paddingLeft: "0.25rem" }}>{error}</p>
             )}
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-yellow-500 hover:bg-yellow-400 active:scale-[0.98] disabled:opacity-40 text-yellow-950 font-bold py-3 rounded-xl transition-all shadow-lg shadow-yellow-500/25 text-sm mt-1"
+              style={{ width: "100%", padding: "0.875rem", background: loading ? "rgba(212,160,23,0.5)" : "#d4a017", border: "none", borderRadius: "12px", color: "#1a0f00", fontWeight: 700, fontSize: "0.875rem", cursor: loading ? "not-allowed" : "pointer", marginTop: "0.25rem", boxShadow: "0 8px 30px rgba(212,160,23,0.3)", transition: "all 0.15s ease" }}
             >
               {loading ? "Signing in..." : "Sign In"}
             </button>
           </form>
         </div>
 
-        <p className="text-center text-white/15 text-xs mt-8">
+        <p style={{ textAlign: "center", color: "rgba(255,255,255,0.15)", fontSize: "0.7rem", marginTop: "2rem" }}>
           © 2026 Badranaya Partnership · Internal Use Only
         </p>
       </div>
