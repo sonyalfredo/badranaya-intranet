@@ -25,11 +25,11 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL", "FINANCE", "ADMIN"] },
   { label: "Billable Hours", href: "/timesheet", icon: Clock, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL"] },
-  { label: "Klien & Matter", href: "/clients", icon: Users, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL", "FINANCE"] },
-  { label: "Kehadiran", href: "/attendance", icon: CalendarDays, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL", "FINANCE", "ADMIN"] },
-  { label: "Keuangan", href: "/finance", icon: Receipt, roles: ["PARTNER", "FINANCE"] },
+  { label: "Clients & Matters", href: "/clients", icon: Users, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL", "FINANCE"] },
+  { label: "Attendance", href: "/attendance", icon: CalendarDays, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL", "FINANCE", "ADMIN"] },
+  { label: "Finance", href: "/finance", icon: Receipt, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL", "FINANCE"] },
   { label: "Knowledge Base", href: "/kms", icon: BookOpen, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL"] },
-  { label: "Laporan", href: "/reports", icon: FileText, roles: ["PARTNER", "ADMIN", "FINANCE"] },
+  { label: "Reports", href: "/reports", icon: FileText, roles: ["PARTNER", "ADMIN", "FINANCE"] },
   { label: "Admin", href: "/admin", icon: Settings, roles: ["ADMIN", "PARTNER"] },
 ]
 
@@ -107,7 +107,7 @@ export default function Sidebar({ userRole, userName, userPosition }: SidebarPro
           className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:bg-slate-800 hover:text-white transition-colors w-full"
         >
           <LogOut size={18} />
-          Keluar
+          Sign Out
         </button>
       </div>
     </aside>

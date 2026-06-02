@@ -25,7 +25,7 @@ export default function LoginPage() {
     setLoading(false)
 
     if (!res.ok) {
-      setError(data.error ?? "Login gagal")
+      setError(data.error ?? "Login failed")
       return
     }
 
@@ -35,38 +35,32 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-700 px-4">
       <div className="w-full max-w-md">
-        {/* Logo & Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-500 rounded-2xl mb-4 shadow-lg">
             <span className="text-white font-bold text-2xl">BP</span>
           </div>
           <h1 className="text-2xl font-bold text-white">Badranaya Partnership</h1>
-          <p className="text-slate-400 text-sm mt-1">Portal Intranet Karyawan</p>
+          <p className="text-slate-400 text-sm mt-1">Employee Intranet Portal</p>
         </div>
 
-        {/* Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-8">
-          <h2 className="text-lg font-semibold text-gray-800 mb-6">Masuk ke Akun Anda</h2>
+          <h2 className="text-lg font-semibold text-gray-800 mb-6">Sign in to your account</h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                Email
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="nama@badranaya.com"
+                placeholder="name@badranaya.com"
                 required
                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                Password
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
               <input
                 type="password"
                 value={password}
@@ -88,13 +82,13 @@ export default function LoginPage() {
               disabled={loading}
               className="w-full bg-amber-500 hover:bg-amber-600 disabled:bg-amber-300 text-white font-semibold py-2.5 px-4 rounded-lg transition text-sm mt-2"
             >
-              {loading ? "Memproses..." : "Masuk"}
+              {loading ? "Signing in..." : "Sign In"}
             </button>
           </form>
         </div>
 
         <p className="text-center text-slate-500 text-xs mt-6">
-          Masalah login? Hubungi Admin IT
+          Having trouble? Contact IT Admin
         </p>
       </div>
     </div>
