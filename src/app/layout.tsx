@@ -6,7 +6,15 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Badranaya Partnership — Intranet",
-  description: "Sistem Manajemen Internal Badranaya Partnership",
+  description: "Employee Intranet Portal — Badranaya Partnership",
+  icons: {
+    icon: [
+      { url: "/badranaya-logo.png", sizes: "32x32" },
+      { url: "/badranaya-logo.png", sizes: "16x16" },
+    ],
+    apple: "/badranaya-logo.png",
+    shortcut: "/badranaya-logo.png",
+  },
 };
 
 export default function RootLayout({
