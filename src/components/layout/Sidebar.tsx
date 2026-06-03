@@ -93,7 +93,7 @@ export default function Sidebar({ userRole, userName, userPosition }: SidebarPro
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-2 space-y-0.5">
+      <nav className="flex-1 px-3 py-2 space-y-0.5 overflow-y-auto">
         <p className="text-[10px] text-white/25 uppercase tracking-widest px-3 pb-2 pt-1">Navigation</p>
         {visibleItems.map((item) => {
           const Icon = item.icon
