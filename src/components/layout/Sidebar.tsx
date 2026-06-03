@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import Image from "next/image"
 import {
   LayoutDashboard, Clock, Users, CalendarDays,
-  Receipt, BookOpen, FileText, Settings, LogOut, ShieldAlert,
+  Receipt, BookOpen, FileText, Settings, LogOut, ShieldAlert, Hash,
 } from "lucide-react"
 import { cn, getRoleLabel } from "@/lib/utils"
 
@@ -23,6 +23,7 @@ const navItems: NavItem[] = [
   { label: "Attendance", href: "/attendance", icon: CalendarDays, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL", "FINANCE", "ADMIN"] },
   { label: "Finance", href: "/finance", icon: Receipt, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL", "FINANCE"] },
   { label: "Knowledge Base", href: "/kms", icon: BookOpen, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL"] },
+  { label: "Document Numbers", href: "/documents", icon: Hash, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL", "ADMIN"] },
   { label: "Reports", href: "/reports", icon: FileText, roles: ["PARTNER", "ADMIN", "FINANCE"] },
   { label: "Admin", href: "/admin", icon: Settings, roles: ["ADMIN", "PARTNER"] },
   { label: "Security Logs", href: "/admin/security", icon: ShieldAlert, roles: ["PARTNER"] },

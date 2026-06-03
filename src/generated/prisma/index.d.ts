@@ -74,6 +74,11 @@ export type Document = $Result.DefaultSelection<Prisma.$DocumentPayload>
  */
 export type KmsArticle = $Result.DefaultSelection<Prisma.$KmsArticlePayload>
 /**
+ * Model DocumentNumber
+ * 
+ */
+export type DocumentNumber = $Result.DefaultSelection<Prisma.$DocumentNumberPayload>
+/**
  * Model AuditLog
  * 
  */
@@ -208,6 +213,22 @@ export const KmsCategory: {
 
 export type KmsCategory = (typeof KmsCategory)[keyof typeof KmsCategory]
 
+
+export const DocType: {
+  LM: 'LM',
+  LO: 'LO',
+  SK: 'SK',
+  SM: 'SM',
+  SOM: 'SOM',
+  GUG: 'GUG',
+  PKS: 'PKS',
+  SP: 'SP',
+  DD: 'DD',
+  FA: 'FA'
+};
+
+export type DocType = (typeof DocType)[keyof typeof DocType]
+
 }
 
 export type Role = $Enums.Role
@@ -257,6 +278,10 @@ export const ClientStatus: typeof $Enums.ClientStatus
 export type KmsCategory = $Enums.KmsCategory
 
 export const KmsCategory: typeof $Enums.KmsCategory
+
+export type DocType = $Enums.DocType
+
+export const DocType: typeof $Enums.DocType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -498,6 +523,16 @@ export class PrismaClient<
     * ```
     */
   get kmsArticle(): Prisma.KmsArticleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.documentNumber`: Exposes CRUD operations for the **DocumentNumber** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DocumentNumbers
+    * const documentNumbers = await prisma.documentNumber.findMany()
+    * ```
+    */
+  get documentNumber(): Prisma.DocumentNumberDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.auditLog`: Exposes CRUD operations for the **AuditLog** model.
@@ -964,6 +999,7 @@ export namespace Prisma {
     Reimbursement: 'Reimbursement',
     Document: 'Document',
     KmsArticle: 'KmsArticle',
+    DocumentNumber: 'DocumentNumber',
     AuditLog: 'AuditLog',
     LoginAttempt: 'LoginAttempt'
   };
@@ -981,7 +1017,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "client" | "matter" | "matterTeam" | "timeEntry" | "timeEntryApproval" | "attendance" | "leaveRequest" | "invoice" | "reimbursement" | "document" | "kmsArticle" | "auditLog" | "loginAttempt"
+      modelProps: "user" | "client" | "matter" | "matterTeam" | "timeEntry" | "timeEntryApproval" | "attendance" | "leaveRequest" | "invoice" | "reimbursement" | "document" | "kmsArticle" | "documentNumber" | "auditLog" | "loginAttempt"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1873,6 +1909,80 @@ export namespace Prisma {
           }
         }
       }
+      DocumentNumber: {
+        payload: Prisma.$DocumentNumberPayload<ExtArgs>
+        fields: Prisma.DocumentNumberFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DocumentNumberFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentNumberPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DocumentNumberFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentNumberPayload>
+          }
+          findFirst: {
+            args: Prisma.DocumentNumberFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentNumberPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DocumentNumberFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentNumberPayload>
+          }
+          findMany: {
+            args: Prisma.DocumentNumberFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentNumberPayload>[]
+          }
+          create: {
+            args: Prisma.DocumentNumberCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentNumberPayload>
+          }
+          createMany: {
+            args: Prisma.DocumentNumberCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DocumentNumberCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentNumberPayload>[]
+          }
+          delete: {
+            args: Prisma.DocumentNumberDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentNumberPayload>
+          }
+          update: {
+            args: Prisma.DocumentNumberUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentNumberPayload>
+          }
+          deleteMany: {
+            args: Prisma.DocumentNumberDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DocumentNumberUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DocumentNumberUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentNumberPayload>[]
+          }
+          upsert: {
+            args: Prisma.DocumentNumberUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DocumentNumberPayload>
+          }
+          aggregate: {
+            args: Prisma.DocumentNumberAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDocumentNumber>
+          }
+          groupBy: {
+            args: Prisma.DocumentNumberGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DocumentNumberGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DocumentNumberCountArgs<ExtArgs>
+            result: $Utils.Optional<DocumentNumberCountAggregateOutputType> | number
+          }
+        }
+      }
       AuditLog: {
         payload: Prisma.$AuditLogPayload<ExtArgs>
         fields: Prisma.AuditLogFieldRefs
@@ -2141,6 +2251,7 @@ export namespace Prisma {
     reimbursement?: ReimbursementOmit
     document?: DocumentOmit
     kmsArticle?: KmsArticleOmit
+    documentNumber?: DocumentNumberOmit
     auditLog?: AuditLogOmit
     loginAttempt?: LoginAttemptOmit
   }
@@ -2235,6 +2346,7 @@ export namespace Prisma {
     kmsArticles: number
     createdClients: number
     approvalLogs: number
+    documentNumbers: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2250,6 +2362,7 @@ export namespace Prisma {
     kmsArticles?: boolean | UserCountOutputTypeCountKmsArticlesArgs
     createdClients?: boolean | UserCountOutputTypeCountCreatedClientsArgs
     approvalLogs?: boolean | UserCountOutputTypeCountApprovalLogsArgs
+    documentNumbers?: boolean | UserCountOutputTypeCountDocumentNumbersArgs
   }
 
   // Custom InputTypes
@@ -2347,6 +2460,13 @@ export namespace Prisma {
     where?: TimeEntryApprovalWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDocumentNumbersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DocumentNumberWhereInput
+  }
+
 
   /**
    * Count Type ClientCountOutputType
@@ -2398,6 +2518,7 @@ export namespace Prisma {
     documents: number
     invoices: number
     reimbursements: number
+    documentNumbers: number
   }
 
   export type MatterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2406,6 +2527,7 @@ export namespace Prisma {
     documents?: boolean | MatterCountOutputTypeCountDocumentsArgs
     invoices?: boolean | MatterCountOutputTypeCountInvoicesArgs
     reimbursements?: boolean | MatterCountOutputTypeCountReimbursementsArgs
+    documentNumbers?: boolean | MatterCountOutputTypeCountDocumentNumbersArgs
   }
 
   // Custom InputTypes
@@ -2452,6 +2574,13 @@ export namespace Prisma {
    */
   export type MatterCountOutputTypeCountReimbursementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReimbursementWhereInput
+  }
+
+  /**
+   * MatterCountOutputType without action
+   */
+  export type MatterCountOutputTypeCountDocumentNumbersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DocumentNumberWhereInput
   }
 
 
@@ -2756,6 +2885,7 @@ export namespace Prisma {
     kmsArticles?: boolean | User$kmsArticlesArgs<ExtArgs>
     createdClients?: boolean | User$createdClientsArgs<ExtArgs>
     approvalLogs?: boolean | User$approvalLogsArgs<ExtArgs>
+    documentNumbers?: boolean | User$documentNumbersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2818,6 +2948,7 @@ export namespace Prisma {
     kmsArticles?: boolean | User$kmsArticlesArgs<ExtArgs>
     createdClients?: boolean | User$createdClientsArgs<ExtArgs>
     approvalLogs?: boolean | User$approvalLogsArgs<ExtArgs>
+    documentNumbers?: boolean | User$documentNumbersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2838,6 +2969,7 @@ export namespace Prisma {
       kmsArticles: Prisma.$KmsArticlePayload<ExtArgs>[]
       createdClients: Prisma.$ClientPayload<ExtArgs>[]
       approvalLogs: Prisma.$TimeEntryApprovalPayload<ExtArgs>[]
+      documentNumbers: Prisma.$DocumentNumberPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3258,6 +3390,7 @@ export namespace Prisma {
     kmsArticles<T extends User$kmsArticlesArgs<ExtArgs> = {}>(args?: Subset<T, User$kmsArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KmsArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdClients<T extends User$createdClientsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdClientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     approvalLogs<T extends User$approvalLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$approvalLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimeEntryApprovalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    documentNumbers<T extends User$documentNumbersArgs<ExtArgs> = {}>(args?: Subset<T, User$documentNumbersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3977,6 +4110,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TimeEntryApprovalScalarFieldEnum | TimeEntryApprovalScalarFieldEnum[]
+  }
+
+  /**
+   * User.documentNumbers
+   */
+  export type User$documentNumbersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberInclude<ExtArgs> | null
+    where?: DocumentNumberWhereInput
+    orderBy?: DocumentNumberOrderByWithRelationInput | DocumentNumberOrderByWithRelationInput[]
+    cursor?: DocumentNumberWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DocumentNumberScalarFieldEnum | DocumentNumberScalarFieldEnum[]
   }
 
   /**
@@ -5424,6 +5581,7 @@ export namespace Prisma {
     documents?: boolean | Matter$documentsArgs<ExtArgs>
     invoices?: boolean | Matter$invoicesArgs<ExtArgs>
     reimbursements?: boolean | Matter$reimbursementsArgs<ExtArgs>
+    documentNumbers?: boolean | Matter$documentNumbersArgs<ExtArgs>
     _count?: boolean | MatterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["matter"]>
 
@@ -5485,6 +5643,7 @@ export namespace Prisma {
     documents?: boolean | Matter$documentsArgs<ExtArgs>
     invoices?: boolean | Matter$invoicesArgs<ExtArgs>
     reimbursements?: boolean | Matter$reimbursementsArgs<ExtArgs>
+    documentNumbers?: boolean | Matter$documentNumbersArgs<ExtArgs>
     _count?: boolean | MatterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MatterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5506,6 +5665,7 @@ export namespace Prisma {
       documents: Prisma.$DocumentPayload<ExtArgs>[]
       invoices: Prisma.$InvoicePayload<ExtArgs>[]
       reimbursements: Prisma.$ReimbursementPayload<ExtArgs>[]
+      documentNumbers: Prisma.$DocumentNumberPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5921,6 +6081,7 @@ export namespace Prisma {
     documents<T extends Matter$documentsArgs<ExtArgs> = {}>(args?: Subset<T, Matter$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     invoices<T extends Matter$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, Matter$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reimbursements<T extends Matter$reimbursementsArgs<ExtArgs> = {}>(args?: Subset<T, Matter$reimbursementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReimbursementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    documentNumbers<T extends Matter$documentNumbersArgs<ExtArgs> = {}>(args?: Subset<T, Matter$documentNumbersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6480,6 +6641,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReimbursementScalarFieldEnum | ReimbursementScalarFieldEnum[]
+  }
+
+  /**
+   * Matter.documentNumbers
+   */
+  export type Matter$documentNumbersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberInclude<ExtArgs> | null
+    where?: DocumentNumberWhereInput
+    orderBy?: DocumentNumberOrderByWithRelationInput | DocumentNumberOrderByWithRelationInput[]
+    cursor?: DocumentNumberWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DocumentNumberScalarFieldEnum | DocumentNumberScalarFieldEnum[]
   }
 
   /**
@@ -16954,6 +17139,1229 @@ export namespace Prisma {
 
 
   /**
+   * Model DocumentNumber
+   */
+
+  export type AggregateDocumentNumber = {
+    _count: DocumentNumberCountAggregateOutputType | null
+    _avg: DocumentNumberAvgAggregateOutputType | null
+    _sum: DocumentNumberSumAggregateOutputType | null
+    _min: DocumentNumberMinAggregateOutputType | null
+    _max: DocumentNumberMaxAggregateOutputType | null
+  }
+
+  export type DocumentNumberAvgAggregateOutputType = {
+    sequence: number | null
+    year: number | null
+    month: number | null
+  }
+
+  export type DocumentNumberSumAggregateOutputType = {
+    sequence: number | null
+    year: number | null
+    month: number | null
+  }
+
+  export type DocumentNumberMinAggregateOutputType = {
+    id: string | null
+    docType: $Enums.DocType | null
+    sequence: number | null
+    year: number | null
+    month: number | null
+    fullNumber: string | null
+    subject: string | null
+    matterId: string | null
+    clientName: string | null
+    requestedBy: string | null
+    notes: string | null
+    createdAt: Date | null
+  }
+
+  export type DocumentNumberMaxAggregateOutputType = {
+    id: string | null
+    docType: $Enums.DocType | null
+    sequence: number | null
+    year: number | null
+    month: number | null
+    fullNumber: string | null
+    subject: string | null
+    matterId: string | null
+    clientName: string | null
+    requestedBy: string | null
+    notes: string | null
+    createdAt: Date | null
+  }
+
+  export type DocumentNumberCountAggregateOutputType = {
+    id: number
+    docType: number
+    sequence: number
+    year: number
+    month: number
+    fullNumber: number
+    subject: number
+    matterId: number
+    clientName: number
+    requestedBy: number
+    notes: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type DocumentNumberAvgAggregateInputType = {
+    sequence?: true
+    year?: true
+    month?: true
+  }
+
+  export type DocumentNumberSumAggregateInputType = {
+    sequence?: true
+    year?: true
+    month?: true
+  }
+
+  export type DocumentNumberMinAggregateInputType = {
+    id?: true
+    docType?: true
+    sequence?: true
+    year?: true
+    month?: true
+    fullNumber?: true
+    subject?: true
+    matterId?: true
+    clientName?: true
+    requestedBy?: true
+    notes?: true
+    createdAt?: true
+  }
+
+  export type DocumentNumberMaxAggregateInputType = {
+    id?: true
+    docType?: true
+    sequence?: true
+    year?: true
+    month?: true
+    fullNumber?: true
+    subject?: true
+    matterId?: true
+    clientName?: true
+    requestedBy?: true
+    notes?: true
+    createdAt?: true
+  }
+
+  export type DocumentNumberCountAggregateInputType = {
+    id?: true
+    docType?: true
+    sequence?: true
+    year?: true
+    month?: true
+    fullNumber?: true
+    subject?: true
+    matterId?: true
+    clientName?: true
+    requestedBy?: true
+    notes?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type DocumentNumberAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DocumentNumber to aggregate.
+     */
+    where?: DocumentNumberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DocumentNumbers to fetch.
+     */
+    orderBy?: DocumentNumberOrderByWithRelationInput | DocumentNumberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DocumentNumberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DocumentNumbers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DocumentNumbers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DocumentNumbers
+    **/
+    _count?: true | DocumentNumberCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DocumentNumberAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DocumentNumberSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DocumentNumberMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DocumentNumberMaxAggregateInputType
+  }
+
+  export type GetDocumentNumberAggregateType<T extends DocumentNumberAggregateArgs> = {
+        [P in keyof T & keyof AggregateDocumentNumber]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDocumentNumber[P]>
+      : GetScalarType<T[P], AggregateDocumentNumber[P]>
+  }
+
+
+
+
+  export type DocumentNumberGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DocumentNumberWhereInput
+    orderBy?: DocumentNumberOrderByWithAggregationInput | DocumentNumberOrderByWithAggregationInput[]
+    by: DocumentNumberScalarFieldEnum[] | DocumentNumberScalarFieldEnum
+    having?: DocumentNumberScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DocumentNumberCountAggregateInputType | true
+    _avg?: DocumentNumberAvgAggregateInputType
+    _sum?: DocumentNumberSumAggregateInputType
+    _min?: DocumentNumberMinAggregateInputType
+    _max?: DocumentNumberMaxAggregateInputType
+  }
+
+  export type DocumentNumberGroupByOutputType = {
+    id: string
+    docType: $Enums.DocType
+    sequence: number
+    year: number
+    month: number
+    fullNumber: string
+    subject: string
+    matterId: string | null
+    clientName: string | null
+    requestedBy: string
+    notes: string | null
+    createdAt: Date
+    _count: DocumentNumberCountAggregateOutputType | null
+    _avg: DocumentNumberAvgAggregateOutputType | null
+    _sum: DocumentNumberSumAggregateOutputType | null
+    _min: DocumentNumberMinAggregateOutputType | null
+    _max: DocumentNumberMaxAggregateOutputType | null
+  }
+
+  type GetDocumentNumberGroupByPayload<T extends DocumentNumberGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DocumentNumberGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DocumentNumberGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DocumentNumberGroupByOutputType[P]>
+            : GetScalarType<T[P], DocumentNumberGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DocumentNumberSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    docType?: boolean
+    sequence?: boolean
+    year?: boolean
+    month?: boolean
+    fullNumber?: boolean
+    subject?: boolean
+    matterId?: boolean
+    clientName?: boolean
+    requestedBy?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    matter?: boolean | DocumentNumber$matterArgs<ExtArgs>
+    requester?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["documentNumber"]>
+
+  export type DocumentNumberSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    docType?: boolean
+    sequence?: boolean
+    year?: boolean
+    month?: boolean
+    fullNumber?: boolean
+    subject?: boolean
+    matterId?: boolean
+    clientName?: boolean
+    requestedBy?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    matter?: boolean | DocumentNumber$matterArgs<ExtArgs>
+    requester?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["documentNumber"]>
+
+  export type DocumentNumberSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    docType?: boolean
+    sequence?: boolean
+    year?: boolean
+    month?: boolean
+    fullNumber?: boolean
+    subject?: boolean
+    matterId?: boolean
+    clientName?: boolean
+    requestedBy?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    matter?: boolean | DocumentNumber$matterArgs<ExtArgs>
+    requester?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["documentNumber"]>
+
+  export type DocumentNumberSelectScalar = {
+    id?: boolean
+    docType?: boolean
+    sequence?: boolean
+    year?: boolean
+    month?: boolean
+    fullNumber?: boolean
+    subject?: boolean
+    matterId?: boolean
+    clientName?: boolean
+    requestedBy?: boolean
+    notes?: boolean
+    createdAt?: boolean
+  }
+
+  export type DocumentNumberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "docType" | "sequence" | "year" | "month" | "fullNumber" | "subject" | "matterId" | "clientName" | "requestedBy" | "notes" | "createdAt", ExtArgs["result"]["documentNumber"]>
+  export type DocumentNumberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    matter?: boolean | DocumentNumber$matterArgs<ExtArgs>
+    requester?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DocumentNumberIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    matter?: boolean | DocumentNumber$matterArgs<ExtArgs>
+    requester?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DocumentNumberIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    matter?: boolean | DocumentNumber$matterArgs<ExtArgs>
+    requester?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $DocumentNumberPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DocumentNumber"
+    objects: {
+      matter: Prisma.$MatterPayload<ExtArgs> | null
+      requester: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      docType: $Enums.DocType
+      sequence: number
+      year: number
+      month: number
+      fullNumber: string
+      subject: string
+      matterId: string | null
+      clientName: string | null
+      requestedBy: string
+      notes: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["documentNumber"]>
+    composites: {}
+  }
+
+  type DocumentNumberGetPayload<S extends boolean | null | undefined | DocumentNumberDefaultArgs> = $Result.GetResult<Prisma.$DocumentNumberPayload, S>
+
+  type DocumentNumberCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DocumentNumberFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DocumentNumberCountAggregateInputType | true
+    }
+
+  export interface DocumentNumberDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DocumentNumber'], meta: { name: 'DocumentNumber' } }
+    /**
+     * Find zero or one DocumentNumber that matches the filter.
+     * @param {DocumentNumberFindUniqueArgs} args - Arguments to find a DocumentNumber
+     * @example
+     * // Get one DocumentNumber
+     * const documentNumber = await prisma.documentNumber.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DocumentNumberFindUniqueArgs>(args: SelectSubset<T, DocumentNumberFindUniqueArgs<ExtArgs>>): Prisma__DocumentNumberClient<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DocumentNumber that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DocumentNumberFindUniqueOrThrowArgs} args - Arguments to find a DocumentNumber
+     * @example
+     * // Get one DocumentNumber
+     * const documentNumber = await prisma.documentNumber.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DocumentNumberFindUniqueOrThrowArgs>(args: SelectSubset<T, DocumentNumberFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DocumentNumberClient<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DocumentNumber that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentNumberFindFirstArgs} args - Arguments to find a DocumentNumber
+     * @example
+     * // Get one DocumentNumber
+     * const documentNumber = await prisma.documentNumber.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DocumentNumberFindFirstArgs>(args?: SelectSubset<T, DocumentNumberFindFirstArgs<ExtArgs>>): Prisma__DocumentNumberClient<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DocumentNumber that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentNumberFindFirstOrThrowArgs} args - Arguments to find a DocumentNumber
+     * @example
+     * // Get one DocumentNumber
+     * const documentNumber = await prisma.documentNumber.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DocumentNumberFindFirstOrThrowArgs>(args?: SelectSubset<T, DocumentNumberFindFirstOrThrowArgs<ExtArgs>>): Prisma__DocumentNumberClient<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DocumentNumbers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentNumberFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DocumentNumbers
+     * const documentNumbers = await prisma.documentNumber.findMany()
+     * 
+     * // Get first 10 DocumentNumbers
+     * const documentNumbers = await prisma.documentNumber.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const documentNumberWithIdOnly = await prisma.documentNumber.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DocumentNumberFindManyArgs>(args?: SelectSubset<T, DocumentNumberFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DocumentNumber.
+     * @param {DocumentNumberCreateArgs} args - Arguments to create a DocumentNumber.
+     * @example
+     * // Create one DocumentNumber
+     * const DocumentNumber = await prisma.documentNumber.create({
+     *   data: {
+     *     // ... data to create a DocumentNumber
+     *   }
+     * })
+     * 
+     */
+    create<T extends DocumentNumberCreateArgs>(args: SelectSubset<T, DocumentNumberCreateArgs<ExtArgs>>): Prisma__DocumentNumberClient<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DocumentNumbers.
+     * @param {DocumentNumberCreateManyArgs} args - Arguments to create many DocumentNumbers.
+     * @example
+     * // Create many DocumentNumbers
+     * const documentNumber = await prisma.documentNumber.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DocumentNumberCreateManyArgs>(args?: SelectSubset<T, DocumentNumberCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DocumentNumbers and returns the data saved in the database.
+     * @param {DocumentNumberCreateManyAndReturnArgs} args - Arguments to create many DocumentNumbers.
+     * @example
+     * // Create many DocumentNumbers
+     * const documentNumber = await prisma.documentNumber.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DocumentNumbers and only return the `id`
+     * const documentNumberWithIdOnly = await prisma.documentNumber.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DocumentNumberCreateManyAndReturnArgs>(args?: SelectSubset<T, DocumentNumberCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DocumentNumber.
+     * @param {DocumentNumberDeleteArgs} args - Arguments to delete one DocumentNumber.
+     * @example
+     * // Delete one DocumentNumber
+     * const DocumentNumber = await prisma.documentNumber.delete({
+     *   where: {
+     *     // ... filter to delete one DocumentNumber
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DocumentNumberDeleteArgs>(args: SelectSubset<T, DocumentNumberDeleteArgs<ExtArgs>>): Prisma__DocumentNumberClient<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DocumentNumber.
+     * @param {DocumentNumberUpdateArgs} args - Arguments to update one DocumentNumber.
+     * @example
+     * // Update one DocumentNumber
+     * const documentNumber = await prisma.documentNumber.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DocumentNumberUpdateArgs>(args: SelectSubset<T, DocumentNumberUpdateArgs<ExtArgs>>): Prisma__DocumentNumberClient<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DocumentNumbers.
+     * @param {DocumentNumberDeleteManyArgs} args - Arguments to filter DocumentNumbers to delete.
+     * @example
+     * // Delete a few DocumentNumbers
+     * const { count } = await prisma.documentNumber.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DocumentNumberDeleteManyArgs>(args?: SelectSubset<T, DocumentNumberDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DocumentNumbers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentNumberUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DocumentNumbers
+     * const documentNumber = await prisma.documentNumber.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DocumentNumberUpdateManyArgs>(args: SelectSubset<T, DocumentNumberUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DocumentNumbers and returns the data updated in the database.
+     * @param {DocumentNumberUpdateManyAndReturnArgs} args - Arguments to update many DocumentNumbers.
+     * @example
+     * // Update many DocumentNumbers
+     * const documentNumber = await prisma.documentNumber.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DocumentNumbers and only return the `id`
+     * const documentNumberWithIdOnly = await prisma.documentNumber.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DocumentNumberUpdateManyAndReturnArgs>(args: SelectSubset<T, DocumentNumberUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DocumentNumber.
+     * @param {DocumentNumberUpsertArgs} args - Arguments to update or create a DocumentNumber.
+     * @example
+     * // Update or create a DocumentNumber
+     * const documentNumber = await prisma.documentNumber.upsert({
+     *   create: {
+     *     // ... data to create a DocumentNumber
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DocumentNumber we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DocumentNumberUpsertArgs>(args: SelectSubset<T, DocumentNumberUpsertArgs<ExtArgs>>): Prisma__DocumentNumberClient<$Result.GetResult<Prisma.$DocumentNumberPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DocumentNumbers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentNumberCountArgs} args - Arguments to filter DocumentNumbers to count.
+     * @example
+     * // Count the number of DocumentNumbers
+     * const count = await prisma.documentNumber.count({
+     *   where: {
+     *     // ... the filter for the DocumentNumbers we want to count
+     *   }
+     * })
+    **/
+    count<T extends DocumentNumberCountArgs>(
+      args?: Subset<T, DocumentNumberCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DocumentNumberCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DocumentNumber.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentNumberAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DocumentNumberAggregateArgs>(args: Subset<T, DocumentNumberAggregateArgs>): Prisma.PrismaPromise<GetDocumentNumberAggregateType<T>>
+
+    /**
+     * Group by DocumentNumber.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DocumentNumberGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DocumentNumberGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DocumentNumberGroupByArgs['orderBy'] }
+        : { orderBy?: DocumentNumberGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DocumentNumberGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDocumentNumberGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DocumentNumber model
+   */
+  readonly fields: DocumentNumberFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DocumentNumber.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DocumentNumberClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    matter<T extends DocumentNumber$matterArgs<ExtArgs> = {}>(args?: Subset<T, DocumentNumber$matterArgs<ExtArgs>>): Prisma__MatterClient<$Result.GetResult<Prisma.$MatterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    requester<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DocumentNumber model
+   */
+  interface DocumentNumberFieldRefs {
+    readonly id: FieldRef<"DocumentNumber", 'String'>
+    readonly docType: FieldRef<"DocumentNumber", 'DocType'>
+    readonly sequence: FieldRef<"DocumentNumber", 'Int'>
+    readonly year: FieldRef<"DocumentNumber", 'Int'>
+    readonly month: FieldRef<"DocumentNumber", 'Int'>
+    readonly fullNumber: FieldRef<"DocumentNumber", 'String'>
+    readonly subject: FieldRef<"DocumentNumber", 'String'>
+    readonly matterId: FieldRef<"DocumentNumber", 'String'>
+    readonly clientName: FieldRef<"DocumentNumber", 'String'>
+    readonly requestedBy: FieldRef<"DocumentNumber", 'String'>
+    readonly notes: FieldRef<"DocumentNumber", 'String'>
+    readonly createdAt: FieldRef<"DocumentNumber", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DocumentNumber findUnique
+   */
+  export type DocumentNumberFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentNumber to fetch.
+     */
+    where: DocumentNumberWhereUniqueInput
+  }
+
+  /**
+   * DocumentNumber findUniqueOrThrow
+   */
+  export type DocumentNumberFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentNumber to fetch.
+     */
+    where: DocumentNumberWhereUniqueInput
+  }
+
+  /**
+   * DocumentNumber findFirst
+   */
+  export type DocumentNumberFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentNumber to fetch.
+     */
+    where?: DocumentNumberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DocumentNumbers to fetch.
+     */
+    orderBy?: DocumentNumberOrderByWithRelationInput | DocumentNumberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DocumentNumbers.
+     */
+    cursor?: DocumentNumberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DocumentNumbers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DocumentNumbers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DocumentNumbers.
+     */
+    distinct?: DocumentNumberScalarFieldEnum | DocumentNumberScalarFieldEnum[]
+  }
+
+  /**
+   * DocumentNumber findFirstOrThrow
+   */
+  export type DocumentNumberFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentNumber to fetch.
+     */
+    where?: DocumentNumberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DocumentNumbers to fetch.
+     */
+    orderBy?: DocumentNumberOrderByWithRelationInput | DocumentNumberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DocumentNumbers.
+     */
+    cursor?: DocumentNumberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DocumentNumbers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DocumentNumbers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DocumentNumbers.
+     */
+    distinct?: DocumentNumberScalarFieldEnum | DocumentNumberScalarFieldEnum[]
+  }
+
+  /**
+   * DocumentNumber findMany
+   */
+  export type DocumentNumberFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberInclude<ExtArgs> | null
+    /**
+     * Filter, which DocumentNumbers to fetch.
+     */
+    where?: DocumentNumberWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DocumentNumbers to fetch.
+     */
+    orderBy?: DocumentNumberOrderByWithRelationInput | DocumentNumberOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DocumentNumbers.
+     */
+    cursor?: DocumentNumberWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DocumentNumbers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DocumentNumbers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DocumentNumbers.
+     */
+    distinct?: DocumentNumberScalarFieldEnum | DocumentNumberScalarFieldEnum[]
+  }
+
+  /**
+   * DocumentNumber create
+   */
+  export type DocumentNumberCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DocumentNumber.
+     */
+    data: XOR<DocumentNumberCreateInput, DocumentNumberUncheckedCreateInput>
+  }
+
+  /**
+   * DocumentNumber createMany
+   */
+  export type DocumentNumberCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DocumentNumbers.
+     */
+    data: DocumentNumberCreateManyInput | DocumentNumberCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DocumentNumber createManyAndReturn
+   */
+  export type DocumentNumberCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * The data used to create many DocumentNumbers.
+     */
+    data: DocumentNumberCreateManyInput | DocumentNumberCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DocumentNumber update
+   */
+  export type DocumentNumberUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DocumentNumber.
+     */
+    data: XOR<DocumentNumberUpdateInput, DocumentNumberUncheckedUpdateInput>
+    /**
+     * Choose, which DocumentNumber to update.
+     */
+    where: DocumentNumberWhereUniqueInput
+  }
+
+  /**
+   * DocumentNumber updateMany
+   */
+  export type DocumentNumberUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DocumentNumbers.
+     */
+    data: XOR<DocumentNumberUpdateManyMutationInput, DocumentNumberUncheckedUpdateManyInput>
+    /**
+     * Filter which DocumentNumbers to update
+     */
+    where?: DocumentNumberWhereInput
+    /**
+     * Limit how many DocumentNumbers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DocumentNumber updateManyAndReturn
+   */
+  export type DocumentNumberUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * The data used to update DocumentNumbers.
+     */
+    data: XOR<DocumentNumberUpdateManyMutationInput, DocumentNumberUncheckedUpdateManyInput>
+    /**
+     * Filter which DocumentNumbers to update
+     */
+    where?: DocumentNumberWhereInput
+    /**
+     * Limit how many DocumentNumbers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * DocumentNumber upsert
+   */
+  export type DocumentNumberUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DocumentNumber to update in case it exists.
+     */
+    where: DocumentNumberWhereUniqueInput
+    /**
+     * In case the DocumentNumber found by the `where` argument doesn't exist, create a new DocumentNumber with this data.
+     */
+    create: XOR<DocumentNumberCreateInput, DocumentNumberUncheckedCreateInput>
+    /**
+     * In case the DocumentNumber was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DocumentNumberUpdateInput, DocumentNumberUncheckedUpdateInput>
+  }
+
+  /**
+   * DocumentNumber delete
+   */
+  export type DocumentNumberDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberInclude<ExtArgs> | null
+    /**
+     * Filter which DocumentNumber to delete.
+     */
+    where: DocumentNumberWhereUniqueInput
+  }
+
+  /**
+   * DocumentNumber deleteMany
+   */
+  export type DocumentNumberDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DocumentNumbers to delete
+     */
+    where?: DocumentNumberWhereInput
+    /**
+     * Limit how many DocumentNumbers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DocumentNumber.matter
+   */
+  export type DocumentNumber$matterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Matter
+     */
+    select?: MatterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Matter
+     */
+    omit?: MatterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MatterInclude<ExtArgs> | null
+    where?: MatterWhereInput
+  }
+
+  /**
+   * DocumentNumber without action
+   */
+  export type DocumentNumberDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentNumber
+     */
+    select?: DocumentNumberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DocumentNumber
+     */
+    omit?: DocumentNumberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DocumentNumberInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model AuditLog
    */
 
@@ -19262,6 +20670,24 @@ export namespace Prisma {
   export type KmsArticleScalarFieldEnum = (typeof KmsArticleScalarFieldEnum)[keyof typeof KmsArticleScalarFieldEnum]
 
 
+  export const DocumentNumberScalarFieldEnum: {
+    id: 'id',
+    docType: 'docType',
+    sequence: 'sequence',
+    year: 'year',
+    month: 'month',
+    fullNumber: 'fullNumber',
+    subject: 'subject',
+    matterId: 'matterId',
+    clientName: 'clientName',
+    requestedBy: 'requestedBy',
+    notes: 'notes',
+    createdAt: 'createdAt'
+  };
+
+  export type DocumentNumberScalarFieldEnum = (typeof DocumentNumberScalarFieldEnum)[keyof typeof DocumentNumberScalarFieldEnum]
+
+
   export const AuditLogScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -19550,6 +20976,20 @@ export namespace Prisma {
    */
   export type ListEnumKmsCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'KmsCategory[]'>
     
+
+
+  /**
+   * Reference to a field of type 'DocType'
+   */
+  export type EnumDocTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocType'>
+    
+
+
+  /**
+   * Reference to a field of type 'DocType[]'
+   */
+  export type ListEnumDocTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocType[]'>
+    
   /**
    * Deep Input Types
    */
@@ -19583,6 +21023,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleListRelationFilter
     createdClients?: ClientListRelationFilter
     approvalLogs?: TimeEntryApprovalListRelationFilter
+    documentNumbers?: DocumentNumberListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -19610,6 +21051,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleOrderByRelationAggregateInput
     createdClients?: ClientOrderByRelationAggregateInput
     approvalLogs?: TimeEntryApprovalOrderByRelationAggregateInput
+    documentNumbers?: DocumentNumberOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -19640,6 +21082,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleListRelationFilter
     createdClients?: ClientListRelationFilter
     approvalLogs?: TimeEntryApprovalListRelationFilter
+    documentNumbers?: DocumentNumberListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -19794,6 +21237,7 @@ export namespace Prisma {
     documents?: DocumentListRelationFilter
     invoices?: InvoiceListRelationFilter
     reimbursements?: ReimbursementListRelationFilter
+    documentNumbers?: DocumentNumberListRelationFilter
   }
 
   export type MatterOrderByWithRelationInput = {
@@ -19816,6 +21260,7 @@ export namespace Prisma {
     documents?: DocumentOrderByRelationAggregateInput
     invoices?: InvoiceOrderByRelationAggregateInput
     reimbursements?: ReimbursementOrderByRelationAggregateInput
+    documentNumbers?: DocumentNumberOrderByRelationAggregateInput
   }
 
   export type MatterWhereUniqueInput = Prisma.AtLeast<{
@@ -19841,6 +21286,7 @@ export namespace Prisma {
     documents?: DocumentListRelationFilter
     invoices?: InvoiceListRelationFilter
     reimbursements?: ReimbursementListRelationFilter
+    documentNumbers?: DocumentNumberListRelationFilter
   }, "id" | "matterCode">
 
   export type MatterOrderByWithAggregationInput = {
@@ -20608,6 +22054,101 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"KmsArticle"> | Date | string
   }
 
+  export type DocumentNumberWhereInput = {
+    AND?: DocumentNumberWhereInput | DocumentNumberWhereInput[]
+    OR?: DocumentNumberWhereInput[]
+    NOT?: DocumentNumberWhereInput | DocumentNumberWhereInput[]
+    id?: StringFilter<"DocumentNumber"> | string
+    docType?: EnumDocTypeFilter<"DocumentNumber"> | $Enums.DocType
+    sequence?: IntFilter<"DocumentNumber"> | number
+    year?: IntFilter<"DocumentNumber"> | number
+    month?: IntFilter<"DocumentNumber"> | number
+    fullNumber?: StringFilter<"DocumentNumber"> | string
+    subject?: StringFilter<"DocumentNumber"> | string
+    matterId?: StringNullableFilter<"DocumentNumber"> | string | null
+    clientName?: StringNullableFilter<"DocumentNumber"> | string | null
+    requestedBy?: StringFilter<"DocumentNumber"> | string
+    notes?: StringNullableFilter<"DocumentNumber"> | string | null
+    createdAt?: DateTimeFilter<"DocumentNumber"> | Date | string
+    matter?: XOR<MatterNullableScalarRelationFilter, MatterWhereInput> | null
+    requester?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type DocumentNumberOrderByWithRelationInput = {
+    id?: SortOrder
+    docType?: SortOrder
+    sequence?: SortOrder
+    year?: SortOrder
+    month?: SortOrder
+    fullNumber?: SortOrder
+    subject?: SortOrder
+    matterId?: SortOrderInput | SortOrder
+    clientName?: SortOrderInput | SortOrder
+    requestedBy?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    matter?: MatterOrderByWithRelationInput
+    requester?: UserOrderByWithRelationInput
+  }
+
+  export type DocumentNumberWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    fullNumber?: string
+    AND?: DocumentNumberWhereInput | DocumentNumberWhereInput[]
+    OR?: DocumentNumberWhereInput[]
+    NOT?: DocumentNumberWhereInput | DocumentNumberWhereInput[]
+    docType?: EnumDocTypeFilter<"DocumentNumber"> | $Enums.DocType
+    sequence?: IntFilter<"DocumentNumber"> | number
+    year?: IntFilter<"DocumentNumber"> | number
+    month?: IntFilter<"DocumentNumber"> | number
+    subject?: StringFilter<"DocumentNumber"> | string
+    matterId?: StringNullableFilter<"DocumentNumber"> | string | null
+    clientName?: StringNullableFilter<"DocumentNumber"> | string | null
+    requestedBy?: StringFilter<"DocumentNumber"> | string
+    notes?: StringNullableFilter<"DocumentNumber"> | string | null
+    createdAt?: DateTimeFilter<"DocumentNumber"> | Date | string
+    matter?: XOR<MatterNullableScalarRelationFilter, MatterWhereInput> | null
+    requester?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "fullNumber">
+
+  export type DocumentNumberOrderByWithAggregationInput = {
+    id?: SortOrder
+    docType?: SortOrder
+    sequence?: SortOrder
+    year?: SortOrder
+    month?: SortOrder
+    fullNumber?: SortOrder
+    subject?: SortOrder
+    matterId?: SortOrderInput | SortOrder
+    clientName?: SortOrderInput | SortOrder
+    requestedBy?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: DocumentNumberCountOrderByAggregateInput
+    _avg?: DocumentNumberAvgOrderByAggregateInput
+    _max?: DocumentNumberMaxOrderByAggregateInput
+    _min?: DocumentNumberMinOrderByAggregateInput
+    _sum?: DocumentNumberSumOrderByAggregateInput
+  }
+
+  export type DocumentNumberScalarWhereWithAggregatesInput = {
+    AND?: DocumentNumberScalarWhereWithAggregatesInput | DocumentNumberScalarWhereWithAggregatesInput[]
+    OR?: DocumentNumberScalarWhereWithAggregatesInput[]
+    NOT?: DocumentNumberScalarWhereWithAggregatesInput | DocumentNumberScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DocumentNumber"> | string
+    docType?: EnumDocTypeWithAggregatesFilter<"DocumentNumber"> | $Enums.DocType
+    sequence?: IntWithAggregatesFilter<"DocumentNumber"> | number
+    year?: IntWithAggregatesFilter<"DocumentNumber"> | number
+    month?: IntWithAggregatesFilter<"DocumentNumber"> | number
+    fullNumber?: StringWithAggregatesFilter<"DocumentNumber"> | string
+    subject?: StringWithAggregatesFilter<"DocumentNumber"> | string
+    matterId?: StringNullableWithAggregatesFilter<"DocumentNumber"> | string | null
+    clientName?: StringNullableWithAggregatesFilter<"DocumentNumber"> | string | null
+    requestedBy?: StringWithAggregatesFilter<"DocumentNumber"> | string
+    notes?: StringNullableWithAggregatesFilter<"DocumentNumber"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"DocumentNumber"> | Date | string
+  }
+
   export type AuditLogWhereInput = {
     AND?: AuditLogWhereInput | AuditLogWhereInput[]
     OR?: AuditLogWhereInput[]
@@ -20777,6 +22318,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
     createdClients?: ClientCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -20804,6 +22346,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
     createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUpdateInput = {
@@ -20831,6 +22374,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -20858,6 +22402,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -21028,6 +22573,7 @@ export namespace Prisma {
     documents?: DocumentCreateNestedManyWithoutMatterInput
     invoices?: InvoiceCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutMatterInput
   }
 
   export type MatterUncheckedCreateInput = {
@@ -21048,6 +22594,7 @@ export namespace Prisma {
     documents?: DocumentUncheckedCreateNestedManyWithoutMatterInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementUncheckedCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutMatterInput
   }
 
   export type MatterUpdateInput = {
@@ -21068,6 +22615,7 @@ export namespace Prisma {
     documents?: DocumentUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutMatterNestedInput
   }
 
   export type MatterUncheckedUpdateInput = {
@@ -21088,6 +22636,7 @@ export namespace Prisma {
     documents?: DocumentUncheckedUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUncheckedUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutMatterNestedInput
   }
 
   export type MatterCreateManyInput = {
@@ -21897,6 +23446,109 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DocumentNumberCreateInput = {
+    id?: string
+    docType: $Enums.DocType
+    sequence: number
+    year: number
+    month: number
+    fullNumber: string
+    subject: string
+    clientName?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    matter?: MatterCreateNestedOneWithoutDocumentNumbersInput
+    requester: UserCreateNestedOneWithoutDocumentNumbersInput
+  }
+
+  export type DocumentNumberUncheckedCreateInput = {
+    id?: string
+    docType: $Enums.DocType
+    sequence: number
+    year: number
+    month: number
+    fullNumber: string
+    subject: string
+    matterId?: string | null
+    clientName?: string | null
+    requestedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DocumentNumberUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
+    sequence?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    fullNumber?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    matter?: MatterUpdateOneWithoutDocumentNumbersNestedInput
+    requester?: UserUpdateOneRequiredWithoutDocumentNumbersNestedInput
+  }
+
+  export type DocumentNumberUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
+    sequence?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    fullNumber?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    matterId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DocumentNumberCreateManyInput = {
+    id?: string
+    docType: $Enums.DocType
+    sequence: number
+    year: number
+    month: number
+    fullNumber: string
+    subject: string
+    matterId?: string | null
+    clientName?: string | null
+    requestedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DocumentNumberUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
+    sequence?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    fullNumber?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DocumentNumberUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
+    sequence?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    fullNumber?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    matterId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AuditLogCreateInput = {
     id?: string
     userId?: string | null
@@ -22183,6 +23835,12 @@ export namespace Prisma {
     none?: TimeEntryApprovalWhereInput
   }
 
+  export type DocumentNumberListRelationFilter = {
+    every?: DocumentNumberWhereInput
+    some?: DocumentNumberWhereInput
+    none?: DocumentNumberWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -22221,6 +23879,10 @@ export namespace Prisma {
   }
 
   export type TimeEntryApprovalOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DocumentNumberOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -23160,6 +24822,107 @@ export namespace Prisma {
     _max?: NestedEnumKmsCategoryFilter<$PrismaModel>
   }
 
+  export type EnumDocTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocType | EnumDocTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DocType[] | ListEnumDocTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocType[] | ListEnumDocTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocTypeFilter<$PrismaModel> | $Enums.DocType
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type DocumentNumberCountOrderByAggregateInput = {
+    id?: SortOrder
+    docType?: SortOrder
+    sequence?: SortOrder
+    year?: SortOrder
+    month?: SortOrder
+    fullNumber?: SortOrder
+    subject?: SortOrder
+    matterId?: SortOrder
+    clientName?: SortOrder
+    requestedBy?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DocumentNumberAvgOrderByAggregateInput = {
+    sequence?: SortOrder
+    year?: SortOrder
+    month?: SortOrder
+  }
+
+  export type DocumentNumberMaxOrderByAggregateInput = {
+    id?: SortOrder
+    docType?: SortOrder
+    sequence?: SortOrder
+    year?: SortOrder
+    month?: SortOrder
+    fullNumber?: SortOrder
+    subject?: SortOrder
+    matterId?: SortOrder
+    clientName?: SortOrder
+    requestedBy?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DocumentNumberMinOrderByAggregateInput = {
+    id?: SortOrder
+    docType?: SortOrder
+    sequence?: SortOrder
+    year?: SortOrder
+    month?: SortOrder
+    fullNumber?: SortOrder
+    subject?: SortOrder
+    matterId?: SortOrder
+    clientName?: SortOrder
+    requestedBy?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DocumentNumberSumOrderByAggregateInput = {
+    sequence?: SortOrder
+    year?: SortOrder
+    month?: SortOrder
+  }
+
+  export type EnumDocTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocType | EnumDocTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DocType[] | ListEnumDocTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocType[] | ListEnumDocTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocTypeWithAggregatesFilter<$PrismaModel> | $Enums.DocType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDocTypeFilter<$PrismaModel>
+    _max?: NestedEnumDocTypeFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type AuditLogCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -23316,6 +25079,13 @@ export namespace Prisma {
     connect?: TimeEntryApprovalWhereUniqueInput | TimeEntryApprovalWhereUniqueInput[]
   }
 
+  export type DocumentNumberCreateNestedManyWithoutRequesterInput = {
+    create?: XOR<DocumentNumberCreateWithoutRequesterInput, DocumentNumberUncheckedCreateWithoutRequesterInput> | DocumentNumberCreateWithoutRequesterInput[] | DocumentNumberUncheckedCreateWithoutRequesterInput[]
+    connectOrCreate?: DocumentNumberCreateOrConnectWithoutRequesterInput | DocumentNumberCreateOrConnectWithoutRequesterInput[]
+    createMany?: DocumentNumberCreateManyRequesterInputEnvelope
+    connect?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+  }
+
   export type TimeEntryUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<TimeEntryCreateWithoutUserInput, TimeEntryUncheckedCreateWithoutUserInput> | TimeEntryCreateWithoutUserInput[] | TimeEntryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: TimeEntryCreateOrConnectWithoutUserInput | TimeEntryCreateOrConnectWithoutUserInput[]
@@ -23398,6 +25168,13 @@ export namespace Prisma {
     connectOrCreate?: TimeEntryApprovalCreateOrConnectWithoutReviewerInput | TimeEntryApprovalCreateOrConnectWithoutReviewerInput[]
     createMany?: TimeEntryApprovalCreateManyReviewerInputEnvelope
     connect?: TimeEntryApprovalWhereUniqueInput | TimeEntryApprovalWhereUniqueInput[]
+  }
+
+  export type DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput = {
+    create?: XOR<DocumentNumberCreateWithoutRequesterInput, DocumentNumberUncheckedCreateWithoutRequesterInput> | DocumentNumberCreateWithoutRequesterInput[] | DocumentNumberUncheckedCreateWithoutRequesterInput[]
+    connectOrCreate?: DocumentNumberCreateOrConnectWithoutRequesterInput | DocumentNumberCreateOrConnectWithoutRequesterInput[]
+    createMany?: DocumentNumberCreateManyRequesterInputEnvelope
+    connect?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -23596,6 +25373,20 @@ export namespace Prisma {
     deleteMany?: TimeEntryApprovalScalarWhereInput | TimeEntryApprovalScalarWhereInput[]
   }
 
+  export type DocumentNumberUpdateManyWithoutRequesterNestedInput = {
+    create?: XOR<DocumentNumberCreateWithoutRequesterInput, DocumentNumberUncheckedCreateWithoutRequesterInput> | DocumentNumberCreateWithoutRequesterInput[] | DocumentNumberUncheckedCreateWithoutRequesterInput[]
+    connectOrCreate?: DocumentNumberCreateOrConnectWithoutRequesterInput | DocumentNumberCreateOrConnectWithoutRequesterInput[]
+    upsert?: DocumentNumberUpsertWithWhereUniqueWithoutRequesterInput | DocumentNumberUpsertWithWhereUniqueWithoutRequesterInput[]
+    createMany?: DocumentNumberCreateManyRequesterInputEnvelope
+    set?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    disconnect?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    delete?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    connect?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    update?: DocumentNumberUpdateWithWhereUniqueWithoutRequesterInput | DocumentNumberUpdateWithWhereUniqueWithoutRequesterInput[]
+    updateMany?: DocumentNumberUpdateManyWithWhereWithoutRequesterInput | DocumentNumberUpdateManyWithWhereWithoutRequesterInput[]
+    deleteMany?: DocumentNumberScalarWhereInput | DocumentNumberScalarWhereInput[]
+  }
+
   export type TimeEntryUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<TimeEntryCreateWithoutUserInput, TimeEntryUncheckedCreateWithoutUserInput> | TimeEntryCreateWithoutUserInput[] | TimeEntryUncheckedCreateWithoutUserInput[]
     connectOrCreate?: TimeEntryCreateOrConnectWithoutUserInput | TimeEntryCreateOrConnectWithoutUserInput[]
@@ -23764,6 +25555,20 @@ export namespace Prisma {
     deleteMany?: TimeEntryApprovalScalarWhereInput | TimeEntryApprovalScalarWhereInput[]
   }
 
+  export type DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput = {
+    create?: XOR<DocumentNumberCreateWithoutRequesterInput, DocumentNumberUncheckedCreateWithoutRequesterInput> | DocumentNumberCreateWithoutRequesterInput[] | DocumentNumberUncheckedCreateWithoutRequesterInput[]
+    connectOrCreate?: DocumentNumberCreateOrConnectWithoutRequesterInput | DocumentNumberCreateOrConnectWithoutRequesterInput[]
+    upsert?: DocumentNumberUpsertWithWhereUniqueWithoutRequesterInput | DocumentNumberUpsertWithWhereUniqueWithoutRequesterInput[]
+    createMany?: DocumentNumberCreateManyRequesterInputEnvelope
+    set?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    disconnect?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    delete?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    connect?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    update?: DocumentNumberUpdateWithWhereUniqueWithoutRequesterInput | DocumentNumberUpdateWithWhereUniqueWithoutRequesterInput[]
+    updateMany?: DocumentNumberUpdateManyWithWhereWithoutRequesterInput | DocumentNumberUpdateManyWithWhereWithoutRequesterInput[]
+    deleteMany?: DocumentNumberScalarWhereInput | DocumentNumberScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutCreatedClientsInput = {
     create?: XOR<UserCreateWithoutCreatedClientsInput, UserUncheckedCreateWithoutCreatedClientsInput>
     connectOrCreate?: UserCreateOrConnectWithoutCreatedClientsInput
@@ -23913,6 +25718,13 @@ export namespace Prisma {
     connect?: ReimbursementWhereUniqueInput | ReimbursementWhereUniqueInput[]
   }
 
+  export type DocumentNumberCreateNestedManyWithoutMatterInput = {
+    create?: XOR<DocumentNumberCreateWithoutMatterInput, DocumentNumberUncheckedCreateWithoutMatterInput> | DocumentNumberCreateWithoutMatterInput[] | DocumentNumberUncheckedCreateWithoutMatterInput[]
+    connectOrCreate?: DocumentNumberCreateOrConnectWithoutMatterInput | DocumentNumberCreateOrConnectWithoutMatterInput[]
+    createMany?: DocumentNumberCreateManyMatterInputEnvelope
+    connect?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+  }
+
   export type TimeEntryUncheckedCreateNestedManyWithoutMatterInput = {
     create?: XOR<TimeEntryCreateWithoutMatterInput, TimeEntryUncheckedCreateWithoutMatterInput> | TimeEntryCreateWithoutMatterInput[] | TimeEntryUncheckedCreateWithoutMatterInput[]
     connectOrCreate?: TimeEntryCreateOrConnectWithoutMatterInput | TimeEntryCreateOrConnectWithoutMatterInput[]
@@ -23946,6 +25758,13 @@ export namespace Prisma {
     connectOrCreate?: ReimbursementCreateOrConnectWithoutMatterInput | ReimbursementCreateOrConnectWithoutMatterInput[]
     createMany?: ReimbursementCreateManyMatterInputEnvelope
     connect?: ReimbursementWhereUniqueInput | ReimbursementWhereUniqueInput[]
+  }
+
+  export type DocumentNumberUncheckedCreateNestedManyWithoutMatterInput = {
+    create?: XOR<DocumentNumberCreateWithoutMatterInput, DocumentNumberUncheckedCreateWithoutMatterInput> | DocumentNumberCreateWithoutMatterInput[] | DocumentNumberUncheckedCreateWithoutMatterInput[]
+    connectOrCreate?: DocumentNumberCreateOrConnectWithoutMatterInput | DocumentNumberCreateOrConnectWithoutMatterInput[]
+    createMany?: DocumentNumberCreateManyMatterInputEnvelope
+    connect?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
   }
 
   export type EnumPracticeAreaFieldUpdateOperationsInput = {
@@ -24046,6 +25865,20 @@ export namespace Prisma {
     deleteMany?: ReimbursementScalarWhereInput | ReimbursementScalarWhereInput[]
   }
 
+  export type DocumentNumberUpdateManyWithoutMatterNestedInput = {
+    create?: XOR<DocumentNumberCreateWithoutMatterInput, DocumentNumberUncheckedCreateWithoutMatterInput> | DocumentNumberCreateWithoutMatterInput[] | DocumentNumberUncheckedCreateWithoutMatterInput[]
+    connectOrCreate?: DocumentNumberCreateOrConnectWithoutMatterInput | DocumentNumberCreateOrConnectWithoutMatterInput[]
+    upsert?: DocumentNumberUpsertWithWhereUniqueWithoutMatterInput | DocumentNumberUpsertWithWhereUniqueWithoutMatterInput[]
+    createMany?: DocumentNumberCreateManyMatterInputEnvelope
+    set?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    disconnect?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    delete?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    connect?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    update?: DocumentNumberUpdateWithWhereUniqueWithoutMatterInput | DocumentNumberUpdateWithWhereUniqueWithoutMatterInput[]
+    updateMany?: DocumentNumberUpdateManyWithWhereWithoutMatterInput | DocumentNumberUpdateManyWithWhereWithoutMatterInput[]
+    deleteMany?: DocumentNumberScalarWhereInput | DocumentNumberScalarWhereInput[]
+  }
+
   export type TimeEntryUncheckedUpdateManyWithoutMatterNestedInput = {
     create?: XOR<TimeEntryCreateWithoutMatterInput, TimeEntryUncheckedCreateWithoutMatterInput> | TimeEntryCreateWithoutMatterInput[] | TimeEntryUncheckedCreateWithoutMatterInput[]
     connectOrCreate?: TimeEntryCreateOrConnectWithoutMatterInput | TimeEntryCreateOrConnectWithoutMatterInput[]
@@ -24114,6 +25947,20 @@ export namespace Prisma {
     update?: ReimbursementUpdateWithWhereUniqueWithoutMatterInput | ReimbursementUpdateWithWhereUniqueWithoutMatterInput[]
     updateMany?: ReimbursementUpdateManyWithWhereWithoutMatterInput | ReimbursementUpdateManyWithWhereWithoutMatterInput[]
     deleteMany?: ReimbursementScalarWhereInput | ReimbursementScalarWhereInput[]
+  }
+
+  export type DocumentNumberUncheckedUpdateManyWithoutMatterNestedInput = {
+    create?: XOR<DocumentNumberCreateWithoutMatterInput, DocumentNumberUncheckedCreateWithoutMatterInput> | DocumentNumberCreateWithoutMatterInput[] | DocumentNumberUncheckedCreateWithoutMatterInput[]
+    connectOrCreate?: DocumentNumberCreateOrConnectWithoutMatterInput | DocumentNumberCreateOrConnectWithoutMatterInput[]
+    upsert?: DocumentNumberUpsertWithWhereUniqueWithoutMatterInput | DocumentNumberUpsertWithWhereUniqueWithoutMatterInput[]
+    createMany?: DocumentNumberCreateManyMatterInputEnvelope
+    set?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    disconnect?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    delete?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    connect?: DocumentNumberWhereUniqueInput | DocumentNumberWhereUniqueInput[]
+    update?: DocumentNumberUpdateWithWhereUniqueWithoutMatterInput | DocumentNumberUpdateWithWhereUniqueWithoutMatterInput[]
+    updateMany?: DocumentNumberUpdateManyWithWhereWithoutMatterInput | DocumentNumberUpdateManyWithWhereWithoutMatterInput[]
+    deleteMany?: DocumentNumberScalarWhereInput | DocumentNumberScalarWhereInput[]
   }
 
   export type MatterCreateNestedOneWithoutTeamInput = {
@@ -24463,6 +26310,48 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutKmsArticlesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutKmsArticlesInput, UserUpdateWithoutKmsArticlesInput>, UserUncheckedUpdateWithoutKmsArticlesInput>
+  }
+
+  export type MatterCreateNestedOneWithoutDocumentNumbersInput = {
+    create?: XOR<MatterCreateWithoutDocumentNumbersInput, MatterUncheckedCreateWithoutDocumentNumbersInput>
+    connectOrCreate?: MatterCreateOrConnectWithoutDocumentNumbersInput
+    connect?: MatterWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutDocumentNumbersInput = {
+    create?: XOR<UserCreateWithoutDocumentNumbersInput, UserUncheckedCreateWithoutDocumentNumbersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDocumentNumbersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumDocTypeFieldUpdateOperationsInput = {
+    set?: $Enums.DocType
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type MatterUpdateOneWithoutDocumentNumbersNestedInput = {
+    create?: XOR<MatterCreateWithoutDocumentNumbersInput, MatterUncheckedCreateWithoutDocumentNumbersInput>
+    connectOrCreate?: MatterCreateOrConnectWithoutDocumentNumbersInput
+    upsert?: MatterUpsertWithoutDocumentNumbersInput
+    disconnect?: MatterWhereInput | boolean
+    delete?: MatterWhereInput | boolean
+    connect?: MatterWhereUniqueInput
+    update?: XOR<XOR<MatterUpdateToOneWithWhereWithoutDocumentNumbersInput, MatterUpdateWithoutDocumentNumbersInput>, MatterUncheckedUpdateWithoutDocumentNumbersInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutDocumentNumbersNestedInput = {
+    create?: XOR<UserCreateWithoutDocumentNumbersInput, UserUncheckedCreateWithoutDocumentNumbersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDocumentNumbersInput
+    upsert?: UserUpsertWithoutDocumentNumbersInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDocumentNumbersInput, UserUpdateWithoutDocumentNumbersInput>, UserUncheckedUpdateWithoutDocumentNumbersInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -24886,6 +26775,39 @@ export namespace Prisma {
     _max?: NestedEnumKmsCategoryFilter<$PrismaModel>
   }
 
+  export type NestedEnumDocTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocType | EnumDocTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DocType[] | ListEnumDocTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocType[] | ListEnumDocTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocTypeFilter<$PrismaModel> | $Enums.DocType
+  }
+
+  export type NestedEnumDocTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocType | EnumDocTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DocType[] | ListEnumDocTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocType[] | ListEnumDocTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocTypeWithAggregatesFilter<$PrismaModel> | $Enums.DocType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDocTypeFilter<$PrismaModel>
+    _max?: NestedEnumDocTypeFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type TimeEntryCreateWithoutUserInput = {
     id?: string
     date: Date | string
@@ -24991,6 +26913,7 @@ export namespace Prisma {
     documents?: DocumentCreateNestedManyWithoutMatterInput
     invoices?: InvoiceCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutMatterInput
   }
 
   export type MatterUncheckedCreateWithoutLawyerInput = {
@@ -25010,6 +26933,7 @@ export namespace Prisma {
     documents?: DocumentUncheckedCreateNestedManyWithoutMatterInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementUncheckedCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutMatterInput
   }
 
   export type MatterCreateOrConnectWithoutLawyerInput = {
@@ -25319,6 +27243,44 @@ export namespace Prisma {
 
   export type TimeEntryApprovalCreateManyReviewerInputEnvelope = {
     data: TimeEntryApprovalCreateManyReviewerInput | TimeEntryApprovalCreateManyReviewerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DocumentNumberCreateWithoutRequesterInput = {
+    id?: string
+    docType: $Enums.DocType
+    sequence: number
+    year: number
+    month: number
+    fullNumber: string
+    subject: string
+    clientName?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    matter?: MatterCreateNestedOneWithoutDocumentNumbersInput
+  }
+
+  export type DocumentNumberUncheckedCreateWithoutRequesterInput = {
+    id?: string
+    docType: $Enums.DocType
+    sequence: number
+    year: number
+    month: number
+    fullNumber: string
+    subject: string
+    matterId?: string | null
+    clientName?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DocumentNumberCreateOrConnectWithoutRequesterInput = {
+    where: DocumentNumberWhereUniqueInput
+    create: XOR<DocumentNumberCreateWithoutRequesterInput, DocumentNumberUncheckedCreateWithoutRequesterInput>
+  }
+
+  export type DocumentNumberCreateManyRequesterInputEnvelope = {
+    data: DocumentNumberCreateManyRequesterInput | DocumentNumberCreateManyRequesterInput[]
     skipDuplicates?: boolean
   }
 
@@ -25657,6 +27619,40 @@ export namespace Prisma {
     reviewedAt?: DateTimeFilter<"TimeEntryApproval"> | Date | string
   }
 
+  export type DocumentNumberUpsertWithWhereUniqueWithoutRequesterInput = {
+    where: DocumentNumberWhereUniqueInput
+    update: XOR<DocumentNumberUpdateWithoutRequesterInput, DocumentNumberUncheckedUpdateWithoutRequesterInput>
+    create: XOR<DocumentNumberCreateWithoutRequesterInput, DocumentNumberUncheckedCreateWithoutRequesterInput>
+  }
+
+  export type DocumentNumberUpdateWithWhereUniqueWithoutRequesterInput = {
+    where: DocumentNumberWhereUniqueInput
+    data: XOR<DocumentNumberUpdateWithoutRequesterInput, DocumentNumberUncheckedUpdateWithoutRequesterInput>
+  }
+
+  export type DocumentNumberUpdateManyWithWhereWithoutRequesterInput = {
+    where: DocumentNumberScalarWhereInput
+    data: XOR<DocumentNumberUpdateManyMutationInput, DocumentNumberUncheckedUpdateManyWithoutRequesterInput>
+  }
+
+  export type DocumentNumberScalarWhereInput = {
+    AND?: DocumentNumberScalarWhereInput | DocumentNumberScalarWhereInput[]
+    OR?: DocumentNumberScalarWhereInput[]
+    NOT?: DocumentNumberScalarWhereInput | DocumentNumberScalarWhereInput[]
+    id?: StringFilter<"DocumentNumber"> | string
+    docType?: EnumDocTypeFilter<"DocumentNumber"> | $Enums.DocType
+    sequence?: IntFilter<"DocumentNumber"> | number
+    year?: IntFilter<"DocumentNumber"> | number
+    month?: IntFilter<"DocumentNumber"> | number
+    fullNumber?: StringFilter<"DocumentNumber"> | string
+    subject?: StringFilter<"DocumentNumber"> | string
+    matterId?: StringNullableFilter<"DocumentNumber"> | string | null
+    clientName?: StringNullableFilter<"DocumentNumber"> | string | null
+    requestedBy?: StringFilter<"DocumentNumber"> | string
+    notes?: StringNullableFilter<"DocumentNumber"> | string | null
+    createdAt?: DateTimeFilter<"DocumentNumber"> | Date | string
+  }
+
   export type UserCreateWithoutCreatedClientsInput = {
     id?: string
     name: string
@@ -25681,6 +27677,7 @@ export namespace Prisma {
     approvedReimbursements?: ReimbursementCreateNestedManyWithoutReviewerInput
     kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateWithoutCreatedClientsInput = {
@@ -25707,6 +27704,7 @@ export namespace Prisma {
     approvedReimbursements?: ReimbursementUncheckedCreateNestedManyWithoutReviewerInput
     kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserCreateOrConnectWithoutCreatedClientsInput = {
@@ -25731,6 +27729,7 @@ export namespace Prisma {
     documents?: DocumentCreateNestedManyWithoutMatterInput
     invoices?: InvoiceCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutMatterInput
   }
 
   export type MatterUncheckedCreateWithoutClientInput = {
@@ -25750,6 +27749,7 @@ export namespace Prisma {
     documents?: DocumentUncheckedCreateNestedManyWithoutMatterInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementUncheckedCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutMatterInput
   }
 
   export type MatterCreateOrConnectWithoutClientInput = {
@@ -25829,6 +27829,7 @@ export namespace Prisma {
     approvedReimbursements?: ReimbursementUpdateManyWithoutReviewerNestedInput
     kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedClientsInput = {
@@ -25855,6 +27856,7 @@ export namespace Prisma {
     approvedReimbursements?: ReimbursementUncheckedUpdateManyWithoutReviewerNestedInput
     kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
   }
 
   export type MatterUpsertWithWhereUniqueWithoutClientInput = {
@@ -25963,6 +27965,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
     createdClients?: ClientCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateWithoutMattersInChargeInput = {
@@ -25989,6 +27992,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
     createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserCreateOrConnectWithoutMattersInChargeInput = {
@@ -26162,6 +28166,44 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type DocumentNumberCreateWithoutMatterInput = {
+    id?: string
+    docType: $Enums.DocType
+    sequence: number
+    year: number
+    month: number
+    fullNumber: string
+    subject: string
+    clientName?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    requester: UserCreateNestedOneWithoutDocumentNumbersInput
+  }
+
+  export type DocumentNumberUncheckedCreateWithoutMatterInput = {
+    id?: string
+    docType: $Enums.DocType
+    sequence: number
+    year: number
+    month: number
+    fullNumber: string
+    subject: string
+    clientName?: string | null
+    requestedBy: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DocumentNumberCreateOrConnectWithoutMatterInput = {
+    where: DocumentNumberWhereUniqueInput
+    create: XOR<DocumentNumberCreateWithoutMatterInput, DocumentNumberUncheckedCreateWithoutMatterInput>
+  }
+
+  export type DocumentNumberCreateManyMatterInputEnvelope = {
+    data: DocumentNumberCreateManyMatterInput | DocumentNumberCreateManyMatterInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ClientUpsertWithoutMattersInput = {
     update: XOR<ClientUpdateWithoutMattersInput, ClientUncheckedUpdateWithoutMattersInput>
     create: XOR<ClientCreateWithoutMattersInput, ClientUncheckedCreateWithoutMattersInput>
@@ -26238,6 +28280,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMattersInChargeInput = {
@@ -26264,6 +28307,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
   }
 
   export type TimeEntryUpsertWithWhereUniqueWithoutMatterInput = {
@@ -26361,6 +28405,22 @@ export namespace Prisma {
     data: XOR<ReimbursementUpdateManyMutationInput, ReimbursementUncheckedUpdateManyWithoutMatterInput>
   }
 
+  export type DocumentNumberUpsertWithWhereUniqueWithoutMatterInput = {
+    where: DocumentNumberWhereUniqueInput
+    update: XOR<DocumentNumberUpdateWithoutMatterInput, DocumentNumberUncheckedUpdateWithoutMatterInput>
+    create: XOR<DocumentNumberCreateWithoutMatterInput, DocumentNumberUncheckedCreateWithoutMatterInput>
+  }
+
+  export type DocumentNumberUpdateWithWhereUniqueWithoutMatterInput = {
+    where: DocumentNumberWhereUniqueInput
+    data: XOR<DocumentNumberUpdateWithoutMatterInput, DocumentNumberUncheckedUpdateWithoutMatterInput>
+  }
+
+  export type DocumentNumberUpdateManyWithWhereWithoutMatterInput = {
+    where: DocumentNumberScalarWhereInput
+    data: XOR<DocumentNumberUpdateManyMutationInput, DocumentNumberUncheckedUpdateManyWithoutMatterInput>
+  }
+
   export type MatterCreateWithoutTeamInput = {
     id?: string
     matterCode: string
@@ -26378,6 +28438,7 @@ export namespace Prisma {
     documents?: DocumentCreateNestedManyWithoutMatterInput
     invoices?: InvoiceCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutMatterInput
   }
 
   export type MatterUncheckedCreateWithoutTeamInput = {
@@ -26397,6 +28458,7 @@ export namespace Prisma {
     documents?: DocumentUncheckedCreateNestedManyWithoutMatterInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementUncheckedCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutMatterInput
   }
 
   export type MatterCreateOrConnectWithoutTeamInput = {
@@ -26428,6 +28490,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
     createdClients?: ClientCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateWithoutMatterTeamsInput = {
@@ -26454,6 +28517,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
     createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserCreateOrConnectWithoutMatterTeamsInput = {
@@ -26489,6 +28553,7 @@ export namespace Prisma {
     documents?: DocumentUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutMatterNestedInput
   }
 
   export type MatterUncheckedUpdateWithoutTeamInput = {
@@ -26508,6 +28573,7 @@ export namespace Prisma {
     documents?: DocumentUncheckedUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUncheckedUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutMatterNestedInput
   }
 
   export type UserUpsertWithoutMatterTeamsInput = {
@@ -26545,6 +28611,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMatterTeamsInput = {
@@ -26571,6 +28638,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserCreateWithoutTimeEntriesInput = {
@@ -26597,6 +28665,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
     createdClients?: ClientCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateWithoutTimeEntriesInput = {
@@ -26623,6 +28692,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
     createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserCreateOrConnectWithoutTimeEntriesInput = {
@@ -26647,6 +28717,7 @@ export namespace Prisma {
     documents?: DocumentCreateNestedManyWithoutMatterInput
     invoices?: InvoiceCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutMatterInput
   }
 
   export type MatterUncheckedCreateWithoutTimeEntriesInput = {
@@ -26666,6 +28737,7 @@ export namespace Prisma {
     documents?: DocumentUncheckedCreateNestedManyWithoutMatterInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementUncheckedCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutMatterInput
   }
 
   export type MatterCreateOrConnectWithoutTimeEntriesInput = {
@@ -26697,6 +28769,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
     createdClients?: ClientCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateWithoutApprovedEntriesInput = {
@@ -26723,6 +28796,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
     createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserCreateOrConnectWithoutApprovedEntriesInput = {
@@ -26791,6 +28865,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTimeEntriesInput = {
@@ -26817,6 +28892,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
   }
 
   export type MatterUpsertWithoutTimeEntriesInput = {
@@ -26847,6 +28923,7 @@ export namespace Prisma {
     documents?: DocumentUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutMatterNestedInput
   }
 
   export type MatterUncheckedUpdateWithoutTimeEntriesInput = {
@@ -26866,6 +28943,7 @@ export namespace Prisma {
     documents?: DocumentUncheckedUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUncheckedUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutMatterNestedInput
   }
 
   export type UserUpsertWithoutApprovedEntriesInput = {
@@ -26903,6 +28981,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedEntriesInput = {
@@ -26929,6 +29008,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
   }
 
   export type TimeEntryApprovalUpsertWithWhereUniqueWithoutTimeEntryInput = {
@@ -27010,6 +29090,7 @@ export namespace Prisma {
     approvedReimbursements?: ReimbursementCreateNestedManyWithoutReviewerInput
     kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
     createdClients?: ClientCreateNestedManyWithoutCreatorInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateWithoutApprovalLogsInput = {
@@ -27036,6 +29117,7 @@ export namespace Prisma {
     approvedReimbursements?: ReimbursementUncheckedCreateNestedManyWithoutReviewerInput
     kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
     createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserCreateOrConnectWithoutApprovalLogsInput = {
@@ -27123,6 +29205,7 @@ export namespace Prisma {
     approvedReimbursements?: ReimbursementUpdateManyWithoutReviewerNestedInput
     kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUpdateManyWithoutCreatorNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovalLogsInput = {
@@ -27149,6 +29232,7 @@ export namespace Prisma {
     approvedReimbursements?: ReimbursementUncheckedUpdateManyWithoutReviewerNestedInput
     kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserCreateWithoutAttendancesInput = {
@@ -27175,6 +29259,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
     createdClients?: ClientCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateWithoutAttendancesInput = {
@@ -27201,6 +29286,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
     createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserCreateOrConnectWithoutAttendancesInput = {
@@ -27243,6 +29329,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAttendancesInput = {
@@ -27269,6 +29356,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserCreateWithoutLeaveRequestsInput = {
@@ -27295,6 +29383,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
     createdClients?: ClientCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateWithoutLeaveRequestsInput = {
@@ -27321,6 +29410,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
     createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserCreateOrConnectWithoutLeaveRequestsInput = {
@@ -27352,6 +29442,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
     createdClients?: ClientCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateWithoutApprovedLeavesInput = {
@@ -27378,6 +29469,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
     createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserCreateOrConnectWithoutApprovedLeavesInput = {
@@ -27420,6 +29512,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLeaveRequestsInput = {
@@ -27446,6 +29539,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUpsertWithoutApprovedLeavesInput = {
@@ -27483,6 +29577,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedLeavesInput = {
@@ -27509,6 +29604,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
   }
 
   export type MatterCreateWithoutInvoicesInput = {
@@ -27528,6 +29624,7 @@ export namespace Prisma {
     team?: MatterTeamCreateNestedManyWithoutMatterInput
     documents?: DocumentCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutMatterInput
   }
 
   export type MatterUncheckedCreateWithoutInvoicesInput = {
@@ -27547,6 +29644,7 @@ export namespace Prisma {
     team?: MatterTeamUncheckedCreateNestedManyWithoutMatterInput
     documents?: DocumentUncheckedCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementUncheckedCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutMatterInput
   }
 
   export type MatterCreateOrConnectWithoutInvoicesInput = {
@@ -27582,6 +29680,7 @@ export namespace Prisma {
     team?: MatterTeamUpdateManyWithoutMatterNestedInput
     documents?: DocumentUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutMatterNestedInput
   }
 
   export type MatterUncheckedUpdateWithoutInvoicesInput = {
@@ -27601,6 +29700,7 @@ export namespace Prisma {
     team?: MatterTeamUncheckedUpdateManyWithoutMatterNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUncheckedUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutMatterNestedInput
   }
 
   export type UserCreateWithoutReimbursementsInput = {
@@ -27627,6 +29727,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
     createdClients?: ClientCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateWithoutReimbursementsInput = {
@@ -27653,6 +29754,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
     createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserCreateOrConnectWithoutReimbursementsInput = {
@@ -27677,6 +29779,7 @@ export namespace Prisma {
     team?: MatterTeamCreateNestedManyWithoutMatterInput
     documents?: DocumentCreateNestedManyWithoutMatterInput
     invoices?: InvoiceCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutMatterInput
   }
 
   export type MatterUncheckedCreateWithoutReimbursementsInput = {
@@ -27696,6 +29799,7 @@ export namespace Prisma {
     team?: MatterTeamUncheckedCreateNestedManyWithoutMatterInput
     documents?: DocumentUncheckedCreateNestedManyWithoutMatterInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutMatterInput
   }
 
   export type MatterCreateOrConnectWithoutReimbursementsInput = {
@@ -27727,6 +29831,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
     createdClients?: ClientCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateWithoutApprovedReimbursementsInput = {
@@ -27753,6 +29858,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
     createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserCreateOrConnectWithoutApprovedReimbursementsInput = {
@@ -27795,6 +29901,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReimbursementsInput = {
@@ -27821,6 +29928,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
   }
 
   export type MatterUpsertWithoutReimbursementsInput = {
@@ -27851,6 +29959,7 @@ export namespace Prisma {
     team?: MatterTeamUpdateManyWithoutMatterNestedInput
     documents?: DocumentUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutMatterNestedInput
   }
 
   export type MatterUncheckedUpdateWithoutReimbursementsInput = {
@@ -27870,6 +29979,7 @@ export namespace Prisma {
     team?: MatterTeamUncheckedUpdateManyWithoutMatterNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutMatterNestedInput
   }
 
   export type UserUpsertWithoutApprovedReimbursementsInput = {
@@ -27907,6 +30017,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApprovedReimbursementsInput = {
@@ -27933,6 +30044,7 @@ export namespace Prisma {
     kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
   }
 
   export type MatterCreateWithoutDocumentsInput = {
@@ -27952,6 +30064,7 @@ export namespace Prisma {
     team?: MatterTeamCreateNestedManyWithoutMatterInput
     invoices?: InvoiceCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutMatterInput
   }
 
   export type MatterUncheckedCreateWithoutDocumentsInput = {
@@ -27971,6 +30084,7 @@ export namespace Prisma {
     team?: MatterTeamUncheckedCreateNestedManyWithoutMatterInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutMatterInput
     reimbursements?: ReimbursementUncheckedCreateNestedManyWithoutMatterInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutMatterInput
   }
 
   export type MatterCreateOrConnectWithoutDocumentsInput = {
@@ -28041,6 +30155,7 @@ export namespace Prisma {
     team?: MatterTeamUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutMatterNestedInput
   }
 
   export type MatterUncheckedUpdateWithoutDocumentsInput = {
@@ -28060,6 +30175,7 @@ export namespace Prisma {
     team?: MatterTeamUncheckedUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUncheckedUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutMatterNestedInput
   }
 
   export type ClientUpsertWithoutDocumentsInput = {
@@ -28127,6 +30243,7 @@ export namespace Prisma {
     approvedReimbursements?: ReimbursementCreateNestedManyWithoutReviewerInput
     createdClients?: ClientCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberCreateNestedManyWithoutRequesterInput
   }
 
   export type UserUncheckedCreateWithoutKmsArticlesInput = {
@@ -28153,6 +30270,7 @@ export namespace Prisma {
     approvedReimbursements?: ReimbursementUncheckedCreateNestedManyWithoutReviewerInput
     createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
     approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+    documentNumbers?: DocumentNumberUncheckedCreateNestedManyWithoutRequesterInput
   }
 
   export type UserCreateOrConnectWithoutKmsArticlesInput = {
@@ -28195,6 +30313,7 @@ export namespace Prisma {
     approvedReimbursements?: ReimbursementUpdateManyWithoutReviewerNestedInput
     createdClients?: ClientUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutRequesterNestedInput
   }
 
   export type UserUncheckedUpdateWithoutKmsArticlesInput = {
@@ -28219,6 +30338,227 @@ export namespace Prisma {
     approvedLeaves?: LeaveRequestUncheckedUpdateManyWithoutApproverNestedInput
     reimbursements?: ReimbursementUncheckedUpdateManyWithoutUserNestedInput
     approvedReimbursements?: ReimbursementUncheckedUpdateManyWithoutReviewerNestedInput
+    createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
+    approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutRequesterNestedInput
+  }
+
+  export type MatterCreateWithoutDocumentNumbersInput = {
+    id?: string
+    matterCode: string
+    matterName: string
+    practiceArea: $Enums.PracticeArea
+    status?: $Enums.MatterStatus
+    description?: string | null
+    openedAt?: Date | string
+    closedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutMattersInput
+    lawyer: UserCreateNestedOneWithoutMattersInChargeInput
+    timeEntries?: TimeEntryCreateNestedManyWithoutMatterInput
+    team?: MatterTeamCreateNestedManyWithoutMatterInput
+    documents?: DocumentCreateNestedManyWithoutMatterInput
+    invoices?: InvoiceCreateNestedManyWithoutMatterInput
+    reimbursements?: ReimbursementCreateNestedManyWithoutMatterInput
+  }
+
+  export type MatterUncheckedCreateWithoutDocumentNumbersInput = {
+    id?: string
+    matterCode: string
+    matterName: string
+    clientId: string
+    practiceArea: $Enums.PracticeArea
+    lawyerInCharge: string
+    status?: $Enums.MatterStatus
+    description?: string | null
+    openedAt?: Date | string
+    closedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutMatterInput
+    team?: MatterTeamUncheckedCreateNestedManyWithoutMatterInput
+    documents?: DocumentUncheckedCreateNestedManyWithoutMatterInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutMatterInput
+    reimbursements?: ReimbursementUncheckedCreateNestedManyWithoutMatterInput
+  }
+
+  export type MatterCreateOrConnectWithoutDocumentNumbersInput = {
+    where: MatterWhereUniqueInput
+    create: XOR<MatterCreateWithoutDocumentNumbersInput, MatterUncheckedCreateWithoutDocumentNumbersInput>
+  }
+
+  export type UserCreateWithoutDocumentNumbersInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    position?: string | null
+    phone?: string | null
+    avatarUrl?: string | null
+    targetBillableHoursMonthly?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeEntries?: TimeEntryCreateNestedManyWithoutUserInput
+    approvedEntries?: TimeEntryCreateNestedManyWithoutApproverInput
+    mattersInCharge?: MatterCreateNestedManyWithoutLawyerInput
+    matterTeams?: MatterTeamCreateNestedManyWithoutUserInput
+    attendances?: AttendanceCreateNestedManyWithoutUserInput
+    leaveRequests?: LeaveRequestCreateNestedManyWithoutUserInput
+    approvedLeaves?: LeaveRequestCreateNestedManyWithoutApproverInput
+    reimbursements?: ReimbursementCreateNestedManyWithoutUserInput
+    approvedReimbursements?: ReimbursementCreateNestedManyWithoutReviewerInput
+    kmsArticles?: KmsArticleCreateNestedManyWithoutCreatorInput
+    createdClients?: ClientCreateNestedManyWithoutCreatorInput
+    approvalLogs?: TimeEntryApprovalCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserUncheckedCreateWithoutDocumentNumbersInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role: $Enums.Role
+    position?: string | null
+    phone?: string | null
+    avatarUrl?: string | null
+    targetBillableHoursMonthly?: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    timeEntries?: TimeEntryUncheckedCreateNestedManyWithoutUserInput
+    approvedEntries?: TimeEntryUncheckedCreateNestedManyWithoutApproverInput
+    mattersInCharge?: MatterUncheckedCreateNestedManyWithoutLawyerInput
+    matterTeams?: MatterTeamUncheckedCreateNestedManyWithoutUserInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutUserInput
+    leaveRequests?: LeaveRequestUncheckedCreateNestedManyWithoutUserInput
+    approvedLeaves?: LeaveRequestUncheckedCreateNestedManyWithoutApproverInput
+    reimbursements?: ReimbursementUncheckedCreateNestedManyWithoutUserInput
+    approvedReimbursements?: ReimbursementUncheckedCreateNestedManyWithoutReviewerInput
+    kmsArticles?: KmsArticleUncheckedCreateNestedManyWithoutCreatorInput
+    createdClients?: ClientUncheckedCreateNestedManyWithoutCreatorInput
+    approvalLogs?: TimeEntryApprovalUncheckedCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserCreateOrConnectWithoutDocumentNumbersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDocumentNumbersInput, UserUncheckedCreateWithoutDocumentNumbersInput>
+  }
+
+  export type MatterUpsertWithoutDocumentNumbersInput = {
+    update: XOR<MatterUpdateWithoutDocumentNumbersInput, MatterUncheckedUpdateWithoutDocumentNumbersInput>
+    create: XOR<MatterCreateWithoutDocumentNumbersInput, MatterUncheckedCreateWithoutDocumentNumbersInput>
+    where?: MatterWhereInput
+  }
+
+  export type MatterUpdateToOneWithWhereWithoutDocumentNumbersInput = {
+    where?: MatterWhereInput
+    data: XOR<MatterUpdateWithoutDocumentNumbersInput, MatterUncheckedUpdateWithoutDocumentNumbersInput>
+  }
+
+  export type MatterUpdateWithoutDocumentNumbersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matterCode?: StringFieldUpdateOperationsInput | string
+    matterName?: StringFieldUpdateOperationsInput | string
+    practiceArea?: EnumPracticeAreaFieldUpdateOperationsInput | $Enums.PracticeArea
+    status?: EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutMattersNestedInput
+    lawyer?: UserUpdateOneRequiredWithoutMattersInChargeNestedInput
+    timeEntries?: TimeEntryUpdateManyWithoutMatterNestedInput
+    team?: MatterTeamUpdateManyWithoutMatterNestedInput
+    documents?: DocumentUpdateManyWithoutMatterNestedInput
+    invoices?: InvoiceUpdateManyWithoutMatterNestedInput
+    reimbursements?: ReimbursementUpdateManyWithoutMatterNestedInput
+  }
+
+  export type MatterUncheckedUpdateWithoutDocumentNumbersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    matterCode?: StringFieldUpdateOperationsInput | string
+    matterName?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    practiceArea?: EnumPracticeAreaFieldUpdateOperationsInput | $Enums.PracticeArea
+    lawyerInCharge?: StringFieldUpdateOperationsInput | string
+    status?: EnumMatterStatusFieldUpdateOperationsInput | $Enums.MatterStatus
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    openedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutMatterNestedInput
+    team?: MatterTeamUncheckedUpdateManyWithoutMatterNestedInput
+    documents?: DocumentUncheckedUpdateManyWithoutMatterNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutMatterNestedInput
+    reimbursements?: ReimbursementUncheckedUpdateManyWithoutMatterNestedInput
+  }
+
+  export type UserUpsertWithoutDocumentNumbersInput = {
+    update: XOR<UserUpdateWithoutDocumentNumbersInput, UserUncheckedUpdateWithoutDocumentNumbersInput>
+    create: XOR<UserCreateWithoutDocumentNumbersInput, UserUncheckedCreateWithoutDocumentNumbersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDocumentNumbersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDocumentNumbersInput, UserUncheckedUpdateWithoutDocumentNumbersInput>
+  }
+
+  export type UserUpdateWithoutDocumentNumbersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    targetBillableHoursMonthly?: FloatFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeEntries?: TimeEntryUpdateManyWithoutUserNestedInput
+    approvedEntries?: TimeEntryUpdateManyWithoutApproverNestedInput
+    mattersInCharge?: MatterUpdateManyWithoutLawyerNestedInput
+    matterTeams?: MatterTeamUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUpdateManyWithoutUserNestedInput
+    leaveRequests?: LeaveRequestUpdateManyWithoutUserNestedInput
+    approvedLeaves?: LeaveRequestUpdateManyWithoutApproverNestedInput
+    reimbursements?: ReimbursementUpdateManyWithoutUserNestedInput
+    approvedReimbursements?: ReimbursementUpdateManyWithoutReviewerNestedInput
+    kmsArticles?: KmsArticleUpdateManyWithoutCreatorNestedInput
+    createdClients?: ClientUpdateManyWithoutCreatorNestedInput
+    approvalLogs?: TimeEntryApprovalUpdateManyWithoutReviewerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDocumentNumbersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    targetBillableHoursMonthly?: FloatFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    timeEntries?: TimeEntryUncheckedUpdateManyWithoutUserNestedInput
+    approvedEntries?: TimeEntryUncheckedUpdateManyWithoutApproverNestedInput
+    mattersInCharge?: MatterUncheckedUpdateManyWithoutLawyerNestedInput
+    matterTeams?: MatterTeamUncheckedUpdateManyWithoutUserNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutUserNestedInput
+    leaveRequests?: LeaveRequestUncheckedUpdateManyWithoutUserNestedInput
+    approvedLeaves?: LeaveRequestUncheckedUpdateManyWithoutApproverNestedInput
+    reimbursements?: ReimbursementUncheckedUpdateManyWithoutUserNestedInput
+    approvedReimbursements?: ReimbursementUncheckedUpdateManyWithoutReviewerNestedInput
+    kmsArticles?: KmsArticleUncheckedUpdateManyWithoutCreatorNestedInput
     createdClients?: ClientUncheckedUpdateManyWithoutCreatorNestedInput
     approvalLogs?: TimeEntryApprovalUncheckedUpdateManyWithoutReviewerNestedInput
   }
@@ -28372,6 +30712,20 @@ export namespace Prisma {
     reviewedAt?: Date | string
   }
 
+  export type DocumentNumberCreateManyRequesterInput = {
+    id?: string
+    docType: $Enums.DocType
+    sequence: number
+    year: number
+    month: number
+    fullNumber: string
+    subject: string
+    matterId?: string | null
+    clientName?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
   export type TimeEntryUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28489,6 +30843,7 @@ export namespace Prisma {
     documents?: DocumentUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutMatterNestedInput
   }
 
   export type MatterUncheckedUpdateWithoutLawyerInput = {
@@ -28508,6 +30863,7 @@ export namespace Prisma {
     documents?: DocumentUncheckedUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUncheckedUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutMatterNestedInput
   }
 
   export type MatterUncheckedUpdateManyWithoutLawyerInput = {
@@ -28837,6 +31193,48 @@ export namespace Prisma {
     reviewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DocumentNumberUpdateWithoutRequesterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
+    sequence?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    fullNumber?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    matter?: MatterUpdateOneWithoutDocumentNumbersNestedInput
+  }
+
+  export type DocumentNumberUncheckedUpdateWithoutRequesterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
+    sequence?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    fullNumber?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    matterId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DocumentNumberUncheckedUpdateManyWithoutRequesterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
+    sequence?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    fullNumber?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    matterId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type MatterCreateManyClientInput = {
     id?: string
     matterCode: string
@@ -28879,6 +31277,7 @@ export namespace Prisma {
     documents?: DocumentUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUpdateManyWithoutMatterNestedInput
   }
 
   export type MatterUncheckedUpdateWithoutClientInput = {
@@ -28898,6 +31297,7 @@ export namespace Prisma {
     documents?: DocumentUncheckedUpdateManyWithoutMatterNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutMatterNestedInput
     reimbursements?: ReimbursementUncheckedUpdateManyWithoutMatterNestedInput
+    documentNumbers?: DocumentNumberUncheckedUpdateManyWithoutMatterNestedInput
   }
 
   export type MatterUncheckedUpdateManyWithoutClientInput = {
@@ -29002,6 +31402,20 @@ export namespace Prisma {
     reviewedBy?: string | null
     reviewedAt?: Date | string | null
     submittedAt?: Date | string
+  }
+
+  export type DocumentNumberCreateManyMatterInput = {
+    id?: string
+    docType: $Enums.DocType
+    sequence: number
+    year: number
+    month: number
+    fullNumber: string
+    subject: string
+    clientName?: string | null
+    requestedBy: string
+    notes?: string | null
+    createdAt?: Date | string
   }
 
   export type TimeEntryUpdateWithoutMatterInput = {
@@ -29175,6 +31589,48 @@ export namespace Prisma {
     reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DocumentNumberUpdateWithoutMatterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
+    sequence?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    fullNumber?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    requester?: UserUpdateOneRequiredWithoutDocumentNumbersNestedInput
+  }
+
+  export type DocumentNumberUncheckedUpdateWithoutMatterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
+    sequence?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    fullNumber?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DocumentNumberUncheckedUpdateManyWithoutMatterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    docType?: EnumDocTypeFieldUpdateOperationsInput | $Enums.DocType
+    sequence?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    month?: IntFieldUpdateOperationsInput | number
+    fullNumber?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    clientName?: NullableStringFieldUpdateOperationsInput | string | null
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TimeEntryApprovalCreateManyTimeEntryInput = {

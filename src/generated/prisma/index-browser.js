@@ -275,6 +275,21 @@ exports.Prisma.KmsArticleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.DocumentNumberScalarFieldEnum = {
+  id: 'id',
+  docType: 'docType',
+  sequence: 'sequence',
+  year: 'year',
+  month: 'month',
+  fullNumber: 'fullNumber',
+  subject: 'subject',
+  matterId: 'matterId',
+  clientName: 'clientName',
+  requestedBy: 'requestedBy',
+  notes: 'notes',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.AuditLogScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -398,6 +413,19 @@ exports.KmsCategory = exports.$Enums.KmsCategory = {
   PRECEDENT: 'PRECEDENT'
 };
 
+exports.DocType = exports.$Enums.DocType = {
+  LM: 'LM',
+  LO: 'LO',
+  SK: 'SK',
+  SM: 'SM',
+  SOM: 'SOM',
+  GUG: 'GUG',
+  PKS: 'PKS',
+  SP: 'SP',
+  DD: 'DD',
+  FA: 'FA'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Client: 'Client',
@@ -411,6 +439,7 @@ exports.Prisma.ModelName = {
   Reimbursement: 'Reimbursement',
   Document: 'Document',
   KmsArticle: 'KmsArticle',
+  DocumentNumber: 'DocumentNumber',
   AuditLog: 'AuditLog',
   LoginAttempt: 'LoginAttempt'
 };

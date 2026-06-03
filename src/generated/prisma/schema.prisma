@@ -118,6 +118,7 @@ model User {
   kmsArticles            KmsArticle[]
   createdClients         Client[]
   approvalLogs           TimeEntryApproval[]
+  documentNumbers        DocumentNumber[]
 }
 
 model Client {
@@ -154,11 +155,12 @@ model Matter {
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 
-  timeEntries    TimeEntry[]
-  team           MatterTeam[]
-  documents      Document[]
-  invoices       Invoice[]
-  reimbursements Reimbursement[]
+  timeEntries     TimeEntry[]
+  team            MatterTeam[]
+  documents       Document[]
+  invoices        Invoice[]
+  reimbursements  Reimbursement[]
+  documentNumbers DocumentNumber[]
 }
 
 model MatterTeam {
@@ -293,6 +295,42 @@ model KmsArticle {
   creator   User        @relation(fields: [createdBy], references: [id])
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
+}
+
+// ─── DOCUMENT NUMBERING ─────────────────────────────────────
+
+enum DocType {
+  LM // Legal Memo
+  LO // Legal Opinion
+  SK // Surat Keluar
+  SM // Surat Masuk
+  SOM // Somasi
+  GUG // Gugatan
+  PKS // Perjanjian / Kontrak
+  SP // Surat Pernyataan
+  DD // Due Diligence Report
+  FA // Internal Memo
+}
+
+model DocumentNumber {
+  id          String   @id @default(cuid())
+  docType     DocType
+  sequence    Int // urut dalam tahun
+  year        Int
+  month       Int
+  fullNumber  String   @unique // e.g. LM/001/BP/VI/2026
+  subject     String
+  matterId    String?
+  matter      Matter?  @relation(fields: [matterId], references: [id])
+  clientName  String?
+  requestedBy String
+  requester   User     @relation(fields: [requestedBy], references: [id])
+  notes       String?
+  createdAt   DateTime @default(now())
+
+  @@index([docType])
+  @@index([year])
+  @@index([requestedBy])
 }
 
 // ─── SECURITY ───────────────────────────────────────────────
