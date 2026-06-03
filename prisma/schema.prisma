@@ -119,6 +119,7 @@ model User {
   createdClients         Client[]
   approvalLogs           TimeEntryApproval[]
   documentNumbers        DocumentNumber[]
+  bills                  Bill[]
 }
 
 model Client {
@@ -161,6 +162,7 @@ model Matter {
   invoices        Invoice[]
   reimbursements  Reimbursement[]
   documentNumbers DocumentNumber[]
+  bills           Bill[]
 }
 
 model MatterTeam {
@@ -295,6 +297,59 @@ model KmsArticle {
   creator   User        @relation(fields: [createdBy], references: [id])
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
+}
+
+// ─── BILLING ────────────────────────────────────────────────
+
+model BillingRate {
+  id        String   @id @default(cuid())
+  position  String   @unique // "Managing Partner", "Partner", "Associate", etc.
+  ratePerHour Float
+  updatedBy String?
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+enum BillStatus {
+  DRAFT
+  SENT
+  PAID
+  CANCELLED
+}
+
+model Bill {
+  id            String     @id @default(cuid())
+  matterId      String
+  matter        Matter     @relation(fields: [matterId], references: [id])
+  billNumber    String     @unique
+  periodStart   DateTime
+  periodEnd     DateTime
+  subtotal      Float
+  discount      Float      @default(0)
+  otherCharges  Float      @default(0)
+  total         Float
+  notes         String?
+  status        BillStatus @default(DRAFT)
+  createdBy     String
+  creator       User       @relation(fields: [createdBy], references: [id])
+  approvedBy    String?
+  approvedAt    DateTime?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  lineItems     BillLineItem[]
+}
+
+model BillLineItem {
+  id         String @id @default(cuid())
+  billId     String
+  bill       Bill   @relation(fields: [billId], references: [id])
+  userId     String
+  userName   String
+  position   String
+  hours      Float
+  ratePerHour Float
+  amount     Float
 }
 
 // ─── DOCUMENT NUMBERING ─────────────────────────────────────

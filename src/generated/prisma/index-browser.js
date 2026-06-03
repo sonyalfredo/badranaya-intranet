@@ -275,6 +275,45 @@ exports.Prisma.KmsArticleScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BillingRateScalarFieldEnum = {
+  id: 'id',
+  position: 'position',
+  ratePerHour: 'ratePerHour',
+  updatedBy: 'updatedBy',
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.BillScalarFieldEnum = {
+  id: 'id',
+  matterId: 'matterId',
+  billNumber: 'billNumber',
+  periodStart: 'periodStart',
+  periodEnd: 'periodEnd',
+  subtotal: 'subtotal',
+  discount: 'discount',
+  otherCharges: 'otherCharges',
+  total: 'total',
+  notes: 'notes',
+  status: 'status',
+  createdBy: 'createdBy',
+  approvedBy: 'approvedBy',
+  approvedAt: 'approvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BillLineItemScalarFieldEnum = {
+  id: 'id',
+  billId: 'billId',
+  userId: 'userId',
+  userName: 'userName',
+  position: 'position',
+  hours: 'hours',
+  ratePerHour: 'ratePerHour',
+  amount: 'amount'
+};
+
 exports.Prisma.DocumentNumberScalarFieldEnum = {
   id: 'id',
   docType: 'docType',
@@ -413,6 +452,13 @@ exports.KmsCategory = exports.$Enums.KmsCategory = {
   PRECEDENT: 'PRECEDENT'
 };
 
+exports.BillStatus = exports.$Enums.BillStatus = {
+  DRAFT: 'DRAFT',
+  SENT: 'SENT',
+  PAID: 'PAID',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.DocType = exports.$Enums.DocType = {
   LM: 'LM',
   LO: 'LO',
@@ -439,6 +485,9 @@ exports.Prisma.ModelName = {
   Reimbursement: 'Reimbursement',
   Document: 'Document',
   KmsArticle: 'KmsArticle',
+  BillingRate: 'BillingRate',
+  Bill: 'Bill',
+  BillLineItem: 'BillLineItem',
   DocumentNumber: 'DocumentNumber',
   AuditLog: 'AuditLog',
   LoginAttempt: 'LoginAttempt'
