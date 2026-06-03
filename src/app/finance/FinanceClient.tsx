@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Plus, X, Check, Upload, Receipt, FileText, TrendingUp, AlertCircle, ChevronDown } from "lucide-react"
+import { Plus, X, Check, Upload, Receipt, FileText, TrendingUp, AlertCircle, Image, Loader2 } from "lucide-react"
+import { useRef } from "react"
 import { formatCurrency } from "@/lib/utils"
 import type { SessionUser } from "@/lib/session"
 
@@ -81,6 +82,10 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
   const [reimburseForm, setReimburseForm] = useState({ category: "transport", amount: "", description: "", matterCode: "" })
   const [invoiceForm, setInvoiceForm] = useState({ matterId: "", amount: "", dueDate: "", notes: "" })
   const [statusFilter, setStatusFilter] = useState("")
+  const [receiptFile, setReceiptFile] = useState<File | null>(null)
+  const [receiptUrl, setReceiptUrl] = useState<string>("")
+  const [uploading, setUploading] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Summary stats
   const totalPending = reimbursements.filter((r) => r.status === "PENDING").reduce((s, r) => s + r.amount, 0)
@@ -112,7 +117,25 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
     })
   }
 
-  function handleAddReimburse() {
+  async function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setReceiptFile(file)
+    setUploading(true)
+    const fd = new FormData()
+    fd.append("file", file)
+    const res = await fetch("/api/upload", { method: "POST", body: fd })
+    const data = await res.json()
+    setUploading(false)
+    if (res.ok) {
+      setReceiptUrl(data.url)
+    } else {
+      alert(data.error ?? "Upload failed")
+      setReceiptFile(null)
+    }
+  }
+
+  async function handleAddReimburse() {
     if (!reimburseForm.amount || !reimburseForm.description) return
     const newItem: Reimbursement = {
       id: Date.now().toString(),
@@ -123,16 +146,19 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
       category: reimburseForm.category,
       amount: parseFloat(reimburseForm.amount),
       description: reimburseForm.description,
+      receiptUrl: receiptUrl || undefined,
       status: "PENDING",
       submittedAt: new Date().toISOString(),
     }
     setReimbursements((prev) => [newItem, ...prev])
     setShowReimburseForm(false)
     setReimburseForm({ category: "transport", amount: "", description: "", matterCode: "" })
+    setReceiptFile(null)
+    setReceiptUrl("")
     fetch("/api/reimbursements", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ category: newItem.category, amount: newItem.amount, description: newItem.description }),
+      body: JSON.stringify({ category: newItem.category, amount: newItem.amount, description: newItem.description, receiptUrl: receiptUrl || undefined }),
     })
   }
 
@@ -217,8 +243,30 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
                     className="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500" />
                 </div>
                 <div className="flex items-end">
-                  <button className="w-full flex items-center justify-center gap-2 border border-gray-300 text-gray-600 text-sm py-2 rounded-lg hover:bg-gray-50 transition">
-                    <Upload size={15} /> Upload Receipt
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,application/pdf"
+                    onChange={handleFileSelect}
+                    className="hidden"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={uploading}
+                    className={`w-full flex items-center justify-center gap-2 text-sm py-2 rounded-lg transition border ${
+                      receiptUrl
+                        ? "border-green-300 bg-green-50 text-green-700"
+                        : "border-gray-300 text-gray-600 hover:bg-gray-50"
+                    }`}
+                  >
+                    {uploading ? (
+                      <><Loader2 size={15} className="animate-spin" /> Uploading...</>
+                    ) : receiptUrl ? (
+                      <><Check size={15} /> {receiptFile?.name ?? "Receipt uploaded"}</>
+                    ) : (
+                      <><Upload size={15} /> Upload Receipt (JPG/PNG/PDF)</>
+                    )}
                   </button>
                 </div>
                 <div className="col-span-2">
@@ -263,9 +311,17 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
                     {isManager && (
                       <p className="text-xs text-gray-400 mt-1">{r.userName} · {r.userPosition}</p>
                     )}
-                    <p className="text-xs text-gray-400 mt-0.5">
-                      {new Date(r.submittedAt).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
-                    </p>
+                    <div className="flex items-center gap-3 mt-0.5">
+                      <p className="text-xs text-gray-400">
+                        {new Date(r.submittedAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}
+                      </p>
+                      {r.receiptUrl && (
+                        <a href={r.receiptUrl} target="_blank" rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium">
+                          <Image size={11} /> View Receipt
+                        </a>
+                      )}
+                    </div>
                   </div>
                   <div className="flex flex-col items-end gap-2">
                     <p className="font-bold text-gray-900">{formatCurrency(r.amount)}</p>
