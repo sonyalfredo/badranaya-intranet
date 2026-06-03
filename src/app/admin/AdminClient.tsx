@@ -42,7 +42,7 @@ const EMPLOYEES: Employee[] = [
   { id: "18", name: "Anggraini Fabrila", email: "afabrila@badranayalaw.com", role: "FINANCE", position: "Finance", phone: "08990034137", targetBillableHoursMonthly: 0, isActive: true },
   { id: "19", name: "Alisya Gadis Firstania", email: "afirstania@badranayalaw.com", role: "FINANCE", position: "Finance", phone: "089660089679", targetBillableHoursMonthly: 0, isActive: true },
   // Admin
-  { id: "20", name: "Ayu Siska Larasati", email: "info@badranayalaw.com", role: "ADMIN", position: "Administration", phone: "085810686396", targetBillableHoursMonthly: 0, isActive: true },
+  { id: "20", name: "Ayu Siska Larasati", email: "info@badranayalaw.com", role: "ADMIN", position: "Admin & HR", phone: "085810686396", targetBillableHoursMonthly: 0, isActive: true },
 ]
 
 const ROLE_COLORS: Record<string, string> = {
