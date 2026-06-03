@@ -31,17 +31,9 @@ const STATUS_COLORS: Record<string, string> = {
   REJECTED: "bg-red-100 text-red-700",
 }
 
-const MOCK_ATTENDANCE: AttendanceRecord[] = [
-  { id: "1", date: "2026-06-02", checkInAt: "2026-06-02T08:02:00", checkOutAt: "2026-06-02T17:45:00", ipAddress: "192.168.1.10", type: "WFO" },
-  { id: "2", date: "2026-06-01", checkInAt: "2026-06-01T08:15:00", checkOutAt: "2026-06-01T18:30:00", ipAddress: "192.168.1.10", type: "WFO" },
-  { id: "3", date: "2026-05-31", checkInAt: "2026-05-31T09:00:00", type: "COURT", notes: "Hearing — PT Mowilex, PN Jakarta Pusat" },
-  { id: "4", date: "2026-05-30", type: "LEAVE" },
-]
+const MOCK_ATTENDANCE: AttendanceRecord[] = []
 
-const MOCK_LEAVES: LeaveRequest[] = [
-  { id: "1", type: "ANNUAL", startDate: "2026-05-30", endDate: "2026-05-30", reason: "Family matters", status: "APPROVED", submittedAt: "2026-05-28T10:00:00" },
-  { id: "2", type: "OFFICIAL_DUTY", startDate: "2026-06-10", endDate: "2026-06-11", reason: "Court hearing in Surabaya — Matter BP-2026-003", status: "PENDING", submittedAt: "2026-06-02T09:00:00" },
-]
+const MOCK_LEAVES: LeaveRequest[] = []
 
 export default function AttendanceClient({ session }: { session: SessionUser }) {
   const [tab, setTab] = useState<"attendance" | "leave">("attendance")

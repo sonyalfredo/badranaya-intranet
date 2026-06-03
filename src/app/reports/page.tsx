@@ -71,49 +71,8 @@ export default async function ReportsPage() {
 
       {/* Summary Table */}
       {isPartner && (
-        <div className="mt-8 bg-white rounded-xl border border-gray-200 overflow-hidden">
-          <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
-            <h2 className="font-semibold text-gray-800">June 2026 — Team Performance Snapshot</h2>
-            <button className="flex items-center gap-2 text-sm text-amber-600 hover:text-amber-700 font-medium">
-              <FileDown size={15} /> Export All
-            </button>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-gray-50 text-xs text-gray-500 uppercase tracking-wide">
-                  <th className="px-5 py-3 text-left">Lawyer</th>
-                  <th className="px-5 py-3 text-left">Role</th>
-                  <th className="px-5 py-3 text-center">Target (h)</th>
-                  <th className="px-5 py-3 text-center">Billed (h)</th>
-                  <th className="px-5 py-3 text-center">Utilisation</th>
-                  <th className="px-5 py-3 text-right">Est. Revenue</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-50">
-                {[
-                  { name: "Sony Alfredo", role: "Senior Partner", target: 120, billed: 98, rate: 5000000 },
-                  { name: "Reza Firmansyah", role: "Senior Associate", target: 160, billed: 134, rate: 2500000 },
-                  { name: "Siti Rahayu", role: "Paralegal", target: 140, billed: 89, rate: 1500000 },
-                ].map((row) => {
-                  const util = Math.round((row.billed / row.target) * 100)
-                  const color = util >= 90 ? "text-green-600" : util >= 70 ? "text-amber-600" : "text-red-600"
-                  return (
-                    <tr key={row.name} className="hover:bg-gray-50">
-                      <td className="px-5 py-3 font-medium text-gray-800">{row.name}</td>
-                      <td className="px-5 py-3 text-gray-500">{row.role}</td>
-                      <td className="px-5 py-3 text-center text-gray-600">{row.target}h</td>
-                      <td className="px-5 py-3 text-center font-semibold text-gray-800">{row.billed}h</td>
-                      <td className="px-5 py-3 text-center">
-                        <span className={`font-semibold ${color}`}>{util}%</span>
-                      </td>
-                      <td className="px-5 py-3 text-right text-gray-700">{formatCurrency(row.billed * row.rate)}</td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          </div>
+        <div className="mt-8 bg-white rounded-xl border border-gray-200 p-8 text-center">
+          <p className="text-gray-400 text-sm">No data yet — team performance will appear here once employees start logging hours.</p>
         </div>
       )}
     </div>

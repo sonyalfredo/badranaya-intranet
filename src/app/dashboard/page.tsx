@@ -52,11 +52,7 @@ export default async function DashboardPage() {
             <AlertCircle size={20} className="text-amber-500" />
             <h2 className="font-semibold text-gray-800">Pending Your Approval</h2>
           </div>
-          <div className="space-y-3">
-            <ApprovalItem type="Billable Hours" from="Reza Firmansyah" detail="Matter: PT Mowilex — 3.5h, 28 May 2026" />
-            <ApprovalItem type="Annual Leave" from="Siti Rahayu" detail="5–7 June 2026 (3 days)" />
-            <ApprovalItem type="Reimbursement" from="Andi Saputra" detail="Transport to PN Jakarta Pusat — Rp 150,000" />
-          </div>
+          <p className="text-sm text-gray-400 py-4 text-center">No pending approvals</p>
         </div>
       )}
 

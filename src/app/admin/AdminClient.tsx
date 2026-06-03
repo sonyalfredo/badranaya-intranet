@@ -17,11 +17,32 @@ interface Employee {
 }
 
 const MOCK_EMPLOYEES: Employee[] = [
-  { id: "1", name: "Sony Alfredo", email: "partner@badranaya.com", role: "PARTNER", position: "Senior Partner", phone: "0812-0001-0001", targetBillableHoursMonthly: 120, isActive: true },
-  { id: "2", name: "Reza Firmansyah", email: "associate@badranaya.com", role: "ASSOCIATE", position: "Senior Associate", phone: "0812-0002-0002", targetBillableHoursMonthly: 160, isActive: true },
-  { id: "3", name: "Siti Rahayu", email: "paralegal@badranaya.com", role: "PARALEGAL", position: "Paralegal", targetBillableHoursMonthly: 140, isActive: true },
-  { id: "4", name: "Dewi Kusuma", email: "finance@badranaya.com", role: "FINANCE", position: "Finance Manager", targetBillableHoursMonthly: 0, isActive: true },
-  { id: "5", name: "Andi Saputra", email: "admin@badranaya.com", role: "ADMIN", position: "HR & Admin", targetBillableHoursMonthly: 0, isActive: true },
+  // Partners
+  { id: "1", name: "Bhirawa Jayasidayatra Arifi", email: "bhirawa@badranayalaw.com", role: "PARTNER", position: "Managing Partner", phone: "081286931853", targetBillableHoursMonthly: 0, isActive: true },
+  { id: "2", name: "Mangatta Toding Allo", email: "mangatta@badranayalaw.com", role: "PARTNER", position: "Partner", phone: "081182297721", targetBillableHoursMonthly: 0, isActive: true },
+  { id: "3", name: "Sony Hutahaean", email: "sony.hutahaean@badranayalaw.com", role: "PARTNER", position: "Partner", phone: "081317524810", targetBillableHoursMonthly: 0, isActive: true },
+  // Associates
+  { id: "4", name: "Ardi Syahwal", email: "asyahwal@badranayalaw.com", role: "ASSOCIATE", position: "Associate", phone: "085265749999", targetBillableHoursMonthly: 160, isActive: true },
+  { id: "5", name: "David Kurniawan Bengu", email: "dbengu@badranayalaw.com", role: "ASSOCIATE", position: "Associate", phone: "082247589420", targetBillableHoursMonthly: 160, isActive: true },
+  { id: "6", name: "Jordy Herry Christian", email: "jchristian@badranayalaw.com", role: "ASSOCIATE", position: "Associate", phone: "081283549827", targetBillableHoursMonthly: 160, isActive: true },
+  { id: "7", name: "Muhammad Rizki Syaputra", email: "msyaputra@badranayalaw.com", role: "ASSOCIATE", position: "Associate", phone: "082253041471", targetBillableHoursMonthly: 160, isActive: true },
+  { id: "8", name: "Christian Tarihoran", email: "ctarihoran@badranayalaw.com", role: "ASSOCIATE", position: "Associate", phone: "082183548202", targetBillableHoursMonthly: 160, isActive: true },
+  // Junior Associates
+  { id: "9", name: "Euginia Gozali", email: "egozali@badranayalaw.com", role: "ASSOCIATE", position: "Junior Associate", phone: "087868380909", targetBillableHoursMonthly: 140, isActive: true },
+  { id: "10", name: "Maria Dorothy Yustika Pasaribu", email: "mpasaribu@badranayalaw.com", role: "ASSOCIATE", position: "Junior Associate", phone: "085791320266", targetBillableHoursMonthly: 140, isActive: true },
+  { id: "11", name: "Aura Puteri Negeri", email: "anegeri@badranayalaw.com", role: "ASSOCIATE", position: "Junior Associate", phone: "082113313533", targetBillableHoursMonthly: 140, isActive: true },
+  // Trainee Associates
+  { id: "12", name: "Nabila Aliya Nilasari", email: "nnilasari@badranayalaw.com", role: "PARALEGAL", position: "Trainee Associate", phone: "081316358236", targetBillableHoursMonthly: 120, isActive: true },
+  { id: "13", name: "Ziddan Abulauni Mardias", email: "zmardias@badranayalaw.com", role: "PARALEGAL", position: "Trainee Associate", phone: "081803631365", targetBillableHoursMonthly: 120, isActive: true },
+  { id: "14", name: "Sardis Pata'dungan", email: "spatadungan@badranayalaw.com", role: "PARALEGAL", position: "Trainee Associate", phone: "082346237346", targetBillableHoursMonthly: 120, isActive: true },
+  { id: "15", name: "Devina Melosia Mangiwa", email: "dmangiwa@badranayalaw.com", role: "PARALEGAL", position: "Trainee Associate", phone: "081225391988", targetBillableHoursMonthly: 120, isActive: true },
+  { id: "16", name: "Donita Amilia", email: "damilia@badranayalaw.com", role: "PARALEGAL", position: "Trainee Associate", phone: "082331097226", targetBillableHoursMonthly: 120, isActive: true },
+  { id: "17", name: "MHD Dandy Saputra", email: "msaputra@badranayalaw.com", role: "PARALEGAL", position: "Trainee Associate", phone: "08117238384", targetBillableHoursMonthly: 120, isActive: true },
+  // Finance
+  { id: "18", name: "Anggraini Fabrila", email: "afabrila@badranayalaw.com", role: "FINANCE", position: "Finance", phone: "08990034137", targetBillableHoursMonthly: 0, isActive: true },
+  { id: "19", name: "Alisya Gadis Firstania", email: "afirstania@badranayalaw.com", role: "FINANCE", position: "Finance", phone: "089660089679", targetBillableHoursMonthly: 0, isActive: true },
+  // Admin
+  { id: "20", name: "Ayu Siska Larasati", email: "info@badranayalaw.com", role: "ADMIN", position: "Administration", phone: "085810686396", targetBillableHoursMonthly: 0, isActive: true },
 ]
 
 const ROLE_COLORS: Record<string, string> = {
@@ -86,6 +107,7 @@ export default function AdminClient({ session }: { session: SessionUser }) {
 
   const activeCount = employees.filter((e) => e.isActive).length
   const byRole = (role: string) => employees.filter((e) => e.role === role && e.isActive).length
+  const byPosition = (pos: string) => employees.filter((e) => e.position === pos && e.isActive).length
 
   return (
     <div>

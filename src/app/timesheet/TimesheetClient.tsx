@@ -16,17 +16,9 @@ interface TimeEntry {
   status: "DRAFT" | "SUBMITTED" | "APPROVED" | "REJECTED"
 }
 
-const MOCK_MATTERS = [
-  { id: "1", matterCode: "BP-2026-001", matterName: "PT Mowilex — Trademark Dispute", clientName: "PT Mowilex Indonesia" },
-  { id: "2", matterCode: "BP-2026-002", matterName: "PT Sinar Mas — Acquisition", clientName: "PT Sinar Mas Group" },
-  { id: "3", matterCode: "BP-2026-003", matterName: "Surabaya Property Due Diligence", clientName: "PT Ciputra Development" },
-]
+const MOCK_MATTERS: { id: string; matterCode: string; matterName: string; clientName: string }[] = []
 
-const MOCK_ENTRIES: TimeEntry[] = [
-  { id: "1", date: "2026-06-02", matter: "PT Mowilex — Trademark Dispute", matterCode: "BP-2026-001", hours: 2.5, type: "BILLABLE", description: "Drafting cassation memorandum and reviewing Supreme Court jurisprudence", status: "SUBMITTED" },
-  { id: "2", date: "2026-06-02", matter: "PT Sinar Mas — Acquisition", matterCode: "BP-2026-002", hours: 1.5, type: "BILLABLE", description: "Review SPA draft and coordination with opposing counsel", status: "APPROVED" },
-  { id: "3", date: "2026-06-01", matter: "PT Mowilex — Trademark Dispute", matterCode: "BP-2026-001", hours: 3.0, type: "BILLABLE", description: "Hearing at PN Jakarta Pusat — expert witness examination", status: "APPROVED" },
-]
+const MOCK_ENTRIES: TimeEntry[] = []
 
 const STATUS_LABELS: Record<string, string> = {
   DRAFT: "Draft",

@@ -22,16 +22,7 @@ const CATEGORY_CONFIG = {
   PRECEDENT: { label: "Precedent", icon: History, color: "bg-green-100 text-green-700" },
 }
 
-const MOCK_ARTICLES: Article[] = [
-  { id: "1", title: "Standard Civil Lawsuit (Gugatan) Template", category: "TEMPLATE", content: "Template gugatan perdata standar untuk perkara wanprestasi dan perbuatan melawan hukum. Mencakup bagian: identitas para pihak, posita, petitum, dan lampiran bukti.", tags: ["litigation", "civil", "template"], creatorName: "Sony Alfredo", updatedAt: "2026-05-15", fileUrl: "#" },
-  { id: "2", title: "Legal Opinion — Corporate Acquisition Checklist", category: "TEMPLATE", content: "Standar format Legal Opinion untuk transaksi akuisisi perusahaan, meliputi due diligence scope, risk assessment, dan representations & warranties.", tags: ["corporate", "M&A", "legal opinion"], creatorName: "Reza Firmansyah", updatedAt: "2026-04-20", fileUrl: "#" },
-  { id: "3", title: "Somasi Letter Template (Breach of Contract)", category: "TEMPLATE", content: "Template surat somasi untuk perkara wanprestasi dengan batas waktu 14 hari. Dilengkapi dengan format untuk tiga kali somasi berturut-turut.", tags: ["litigation", "somasi", "template"], creatorName: "Sony Alfredo", updatedAt: "2026-03-10" },
-  { id: "4", title: "Trademark Registration Process — Post-Law No. 20/2016", category: "REGULATION", content: "Ringkasan prosedur pendaftaran merek berdasarkan UU No. 20 Tahun 2016 tentang Merek dan Indikasi Geografis, termasuk pembaruan tata cara pengajuan elektronik melalui DJKI.", tags: ["IP", "trademark", "regulation"], creatorName: "Siti Rahayu", updatedAt: "2026-02-28" },
-  { id: "5", title: "Supreme Court Jurisprudence — Trademark Dispute 2024–2025", category: "PRECEDENT", content: "Kumpulan putusan Mahkamah Agung terkait sengketa merek dagang tahun 2024–2025. Analisis ratio decidendi dan implikasinya untuk strategi litigasi.", tags: ["IP", "trademark", "jurisprudence", "MA"], creatorName: "Sony Alfredo", updatedAt: "2026-05-01" },
-  { id: "6", title: "Due Diligence Framework — Property Acquisition", category: "RESEARCH", content: "Framework due diligence untuk akuisisi aset properti komersial, mencakup: pemeriksaan sertifikat, IMB/PBG, sengketa, AMDAL, dan aspek pajak terkait.", tags: ["property", "due diligence", "corporate"], creatorName: "Reza Firmansyah", updatedAt: "2026-04-05" },
-  { id: "7", title: "Deed of Assignment — Intellectual Property Rights", category: "TEMPLATE", content: "Template deed of assignment untuk pengalihan hak kekayaan intelektual (merek, paten, hak cipta) antar badan hukum. Bilingual: Bahasa Indonesia & English.", tags: ["IP", "corporate", "deed", "bilingual"], creatorName: "Sony Alfredo", updatedAt: "2026-01-20", fileUrl: "#" },
-  { id: "8", title: "Employment Termination — Legal Requirements 2026", category: "REGULATION", content: "Update ketentuan PHK berdasarkan PP No. 35/2021 dan perkembangan putusan pengadilan terbaru. Mencakup prosedur bipartit, mediasi, dan penghitungan pesangon.", tags: ["employment", "PHK", "regulation"], creatorName: "Siti Rahayu", updatedAt: "2026-03-15" },
-]
+const MOCK_ARTICLES: Article[] = []
 
 export default function KmsClient({ session }: { session: SessionUser }) {
   const [search, setSearch] = useState("")

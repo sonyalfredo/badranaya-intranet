@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import Image from "next/image"
 import {
   LayoutDashboard, Clock, Users, CalendarDays,
-  Receipt, BookOpen, FileText, Settings, LogOut,
+  Receipt, BookOpen, FileText, Settings, LogOut, ShieldAlert,
 } from "lucide-react"
 import { cn, getRoleLabel } from "@/lib/utils"
 
@@ -25,6 +25,7 @@ const navItems: NavItem[] = [
   { label: "Knowledge Base", href: "/kms", icon: BookOpen, roles: ["PARTNER", "ASSOCIATE", "PARALEGAL"] },
   { label: "Reports", href: "/reports", icon: FileText, roles: ["PARTNER", "ADMIN", "FINANCE"] },
   { label: "Admin", href: "/admin", icon: Settings, roles: ["ADMIN", "PARTNER"] },
+  { label: "Security Logs", href: "/admin/security", icon: ShieldAlert, roles: ["PARTNER"] },
 ]
 
 const ROLE_BADGE: Record<string, string> = {

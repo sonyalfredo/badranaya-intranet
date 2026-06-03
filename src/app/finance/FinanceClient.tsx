@@ -62,19 +62,9 @@ const STATUS_LABELS: Record<string, string> = {
   OVERDUE: "Due Date",
 }
 
-const MOCK_REIMBURSEMENTS: Reimbursement[] = [
-  { id: "1", userId: "u1", userName: "Reza Firmansyah", userPosition: "Senior Associate", matterId: "m1", matterCode: "BP-2026-001", category: "transport", amount: 150000, description: "Ojek online PP ke PN Jakarta Pusat untuk sidang pembuktian", status: "PENDING", submittedAt: "2026-06-02T09:00:00" },
-  { id: "2", userId: "u2", userName: "Siti Rahayu", userPosition: "Paralegal", matterId: "m1", matterCode: "BP-2026-001", category: "leges", amount: 750000, description: "Biaya legalisir dokumen di Kemenkumham", status: "PENDING", submittedAt: "2026-06-01T14:00:00" },
-  { id: "3", userId: "u1", userName: "Reza Firmansyah", userPosition: "Senior Associate", category: "entertainment", amount: 1250000, description: "Makan siang dengan klien PT Sinar Mas Group — diskusi progress akuisisi", status: "APPROVED", submittedAt: "2026-05-30T16:00:00" },
-  { id: "4", userId: "u3", userName: "Sony Alfredo", userPosition: "Senior Partner", matterId: "m2", matterCode: "BP-2026-002", category: "accommodation", amount: 1800000, description: "Hotel 1 malam di Surabaya untuk due diligence properti", status: "PAID", submittedAt: "2026-05-25T10:00:00" },
-]
+const MOCK_REIMBURSEMENTS: Reimbursement[] = []
 
-const MOCK_INVOICES: Invoice[] = [
-  { id: "1", invoiceNumber: "INV-2026-001", clientName: "PT Mowilex Indonesia", matterName: "Sengketa Merek Dagang", matterCode: "BP-2026-001", amount: 45000000, status: "SENT", dueDate: "2026-06-30", issuedAt: "2026-06-01" },
-  { id: "2", invoiceNumber: "INV-2026-002", clientName: "PT Sinar Mas Group", matterName: "Akuisisi PT Maju Bersama", matterCode: "BP-2026-002", amount: 75000000, status: "DRAFT", issuedAt: "2026-06-02" },
-  { id: "3", invoiceNumber: "INV-2025-018", clientName: "PT Mowilex Indonesia", matterName: "Gugatan Wanprestasi", matterCode: "BP-2025-008", amount: 30000000, status: "PAID", issuedAt: "2025-12-15", paidAt: "2026-01-10" },
-  { id: "4", invoiceNumber: "INV-2025-015", clientName: "PT Garuda Emas Tbk", matterName: "Restrukturisasi Utang", matterCode: "BP-2025-005", amount: 60000000, status: "OVERDUE", dueDate: "2026-03-31", issuedAt: "2025-11-01" },
-]
+const MOCK_INVOICES: Invoice[] = []
 
 export default function FinanceClient({ session }: { session: SessionUser }) {
   const [tab, setTab] = useState<"reimbursement" | "invoice">("reimbursement")

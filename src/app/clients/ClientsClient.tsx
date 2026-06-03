@@ -46,27 +46,9 @@ const STATUS_COLORS: Record<string, string> = {
   BILLED: "bg-purple-100 text-purple-700",
 }
 
-const MOCK_CLIENTS: Client[] = [
-  { id: "1", companyName: "PT Mowilex Indonesia", picName: "Budi Santoso", picEmail: "budi@mowilex.com", picPhone: "0812-3456-7890", industry: "Manufaktur Cat", status: "ACTIVE", activeMatterCount: 2, totalMatterCount: 5 },
-  { id: "2", companyName: "PT Sinar Mas Group", picName: "Dewi Rahayu", picEmail: "dewi@sinarmas.com", picPhone: "0821-9876-5432", industry: "Konglomerasi", status: "ACTIVE", activeMatterCount: 1, totalMatterCount: 3 },
-  { id: "3", companyName: "PT Ciputra Development", picName: "Hendra Wijaya", picEmail: "hendra@ciputra.com", industry: "Property", status: "ACTIVE", activeMatterCount: 1, totalMatterCount: 1 },
-  { id: "4", companyName: "CV Berkah Mandiri", picName: "Siti Aminah", picPhone: "0878-1234-5678", industry: "Perdagangan", status: "PROSPECT", activeMatterCount: 0, totalMatterCount: 0 },
-  { id: "5", companyName: "PT Garuda Emas Tbk", picName: "Ronny Halim", picEmail: "ronny@garudaemas.com", industry: "Pertambangan", status: "INACTIVE", activeMatterCount: 0, totalMatterCount: 2 },
-]
+const MOCK_CLIENTS: Client[] = []
 
-const MOCK_MATTERS: Record<string, Matter[]> = {
-  "1": [
-    { id: "1", matterCode: "BP-2026-001", matterName: "Sengketa Merek Dagang", practiceArea: "IP", status: "ACTIVE", lawyerName: "Sony Alfredo", openedAt: "2026-01-15" },
-    { id: "2", matterCode: "BP-2025-008", matterName: "Gugatan Wanprestasi Distributor", practiceArea: "LITIGATION", status: "ACTIVE", lawyerName: "Reza Firmansyah", openedAt: "2025-08-10" },
-    { id: "3", matterCode: "BP-2024-015", matterName: "Permohonan Pailit PT XYZ", practiceArea: "LITIGATION", status: "CLOSED", lawyerName: "Sony Alfredo", openedAt: "2024-05-20" },
-  ],
-  "2": [
-    { id: "4", matterCode: "BP-2026-002", matterName: "Akuisisi PT Maju Bersama", practiceArea: "CORPORATE", status: "ACTIVE", lawyerName: "Sony Alfredo", openedAt: "2026-03-01" },
-  ],
-  "3": [
-    { id: "5", matterCode: "BP-2026-003", matterName: "Due Diligence Property Surabaya", practiceArea: "PROPERTY", status: "ACTIVE", lawyerName: "Andi Saputra", openedAt: "2026-04-12" },
-  ],
-}
+const MOCK_MATTERS: Record<string, Matter[]> = {}
 
 export default function ClientsClient({ session }: { session: SessionUser }) {
   const [search, setSearch] = useState("")
