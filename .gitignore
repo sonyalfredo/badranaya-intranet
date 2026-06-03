@@ -40,5 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/src/generated/prisma
-src/generated/
+# src/generated/ — kept for Vercel build (prisma generate output)

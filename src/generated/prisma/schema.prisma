@@ -1,0 +1,330 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  PARTNER
+  ASSOCIATE
+  PARALEGAL
+  FINANCE
+  ADMIN
+}
+
+enum MatterStatus {
+  ACTIVE
+  ON_HOLD
+  CLOSED
+  BILLED
+}
+
+enum PracticeArea {
+  LITIGATION
+  CORPORATE
+  TAX
+  IP
+  EMPLOYMENT
+  PROPERTY
+  OTHER
+}
+
+enum TimeEntryStatus {
+  DRAFT
+  SUBMITTED
+  APPROVED
+  REJECTED
+}
+
+enum TimeEntryType {
+  BILLABLE
+  NON_BILLABLE
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+}
+
+enum ReimbursementStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  PAID
+}
+
+enum LeaveType {
+  ANNUAL
+  SICK
+  OFFICIAL_DUTY
+  OTHER
+}
+
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AttendanceType {
+  WFO
+  WFH
+  COURT
+  CLIENT_VISIT
+  LEAVE
+}
+
+enum ClientStatus {
+  ACTIVE
+  INACTIVE
+  PROSPECT
+}
+
+enum KmsCategory {
+  TEMPLATE
+  REGULATION
+  RESEARCH
+  PRECEDENT
+}
+
+model User {
+  id                         String   @id @default(cuid())
+  name                       String
+  email                      String   @unique
+  password                   String
+  role                       Role
+  position                   String?
+  phone                      String?
+  avatarUrl                  String?
+  targetBillableHoursMonthly Float    @default(160)
+  isActive                   Boolean  @default(true)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+
+  timeEntries            TimeEntry[]         @relation("UserTimeEntries")
+  approvedEntries        TimeEntry[]         @relation("ApproverTimeEntries")
+  mattersInCharge        Matter[]            @relation("LawyerInCharge")
+  matterTeams            MatterTeam[]
+  attendances            Attendance[]
+  leaveRequests          LeaveRequest[]      @relation("UserLeaveRequests")
+  approvedLeaves         LeaveRequest[]      @relation("ApproverLeaveRequests")
+  reimbursements         Reimbursement[]     @relation("UserReimbursements")
+  approvedReimbursements Reimbursement[]     @relation("ApproverReimbursements")
+  kmsArticles            KmsArticle[]
+  createdClients         Client[]
+  approvalLogs           TimeEntryApproval[]
+}
+
+model Client {
+  id          String       @id @default(cuid())
+  companyName String
+  picName     String
+  picEmail    String?
+  picPhone    String?
+  industry    String?
+  status      ClientStatus @default(ACTIVE)
+  notes       String?
+  createdBy   String
+  creator     User         @relation(fields: [createdBy], references: [id])
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  matters   Matter[]
+  documents Document[]
+}
+
+model Matter {
+  id             String       @id @default(cuid())
+  matterCode     String       @unique
+  matterName     String
+  clientId       String
+  client         Client       @relation(fields: [clientId], references: [id])
+  practiceArea   PracticeArea
+  lawyerInCharge String
+  lawyer         User         @relation("LawyerInCharge", fields: [lawyerInCharge], references: [id])
+  status         MatterStatus @default(ACTIVE)
+  description    String?
+  openedAt       DateTime     @default(now())
+  closedAt       DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  timeEntries    TimeEntry[]
+  team           MatterTeam[]
+  documents      Document[]
+  invoices       Invoice[]
+  reimbursements Reimbursement[]
+}
+
+model MatterTeam {
+  id           String @id @default(cuid())
+  matterId     String
+  matter       Matter @relation(fields: [matterId], references: [id])
+  userId       String
+  user         User   @relation(fields: [userId], references: [id])
+  roleInMatter String
+
+  @@unique([matterId, userId])
+}
+
+model TimeEntry {
+  id             String          @id @default(cuid())
+  userId         String
+  user           User            @relation("UserTimeEntries", fields: [userId], references: [id])
+  matterId       String
+  matter         Matter          @relation(fields: [matterId], references: [id])
+  date           DateTime
+  hours          Float
+  type           TimeEntryType   @default(BILLABLE)
+  description    String
+  status         TimeEntryStatus @default(DRAFT)
+  approvedBy     String?
+  approver       User?           @relation("ApproverTimeEntries", fields: [approvedBy], references: [id])
+  approvedAt     DateTime?
+  rejectionNote  String?
+  timerStartedAt DateTime?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  approvalLogs TimeEntryApproval[]
+}
+
+model TimeEntryApproval {
+  id          String    @id @default(cuid())
+  timeEntryId String
+  timeEntry   TimeEntry @relation(fields: [timeEntryId], references: [id])
+  reviewedBy  String
+  reviewer    User      @relation(fields: [reviewedBy], references: [id])
+  action      String
+  note        String?
+  reviewedAt  DateTime  @default(now())
+}
+
+model Attendance {
+  id          String         @id @default(cuid())
+  userId      String
+  user        User           @relation(fields: [userId], references: [id])
+  date        DateTime
+  checkInAt   DateTime?
+  checkOutAt  DateTime?
+  ipAddress   String?
+  locationLat Float?
+  locationLng Float?
+  type        AttendanceType @default(WFO)
+  notes       String?
+  createdAt   DateTime       @default(now())
+
+  @@unique([userId, date])
+}
+
+model LeaveRequest {
+  id          String      @id @default(cuid())
+  userId      String
+  user        User        @relation("UserLeaveRequests", fields: [userId], references: [id])
+  type        LeaveType
+  startDate   DateTime
+  endDate     DateTime
+  reason      String
+  status      LeaveStatus @default(PENDING)
+  approvedBy  String?
+  approver    User?       @relation("ApproverLeaveRequests", fields: [approvedBy], references: [id])
+  approvedAt  DateTime?
+  rejectNote  String?
+  submittedAt DateTime    @default(now())
+}
+
+model Invoice {
+  id            String        @id @default(cuid())
+  matterId      String
+  matter        Matter        @relation(fields: [matterId], references: [id])
+  invoiceNumber String        @unique
+  amount        Float
+  status        InvoiceStatus @default(DRAFT)
+  dueDate       DateTime?
+  issuedAt      DateTime      @default(now())
+  paidAt        DateTime?
+  notes         String?
+}
+
+model Reimbursement {
+  id          String              @id @default(cuid())
+  userId      String
+  user        User                @relation("UserReimbursements", fields: [userId], references: [id])
+  matterId    String?
+  matter      Matter?             @relation(fields: [matterId], references: [id])
+  category    String
+  amount      Float
+  description String
+  receiptUrl  String?
+  status      ReimbursementStatus @default(PENDING)
+  reviewedBy  String?
+  reviewer    User?               @relation("ApproverReimbursements", fields: [reviewedBy], references: [id])
+  reviewedAt  DateTime?
+  submittedAt DateTime            @default(now())
+}
+
+model Document {
+  id         String   @id @default(cuid())
+  matterId   String?
+  matter     Matter?  @relation(fields: [matterId], references: [id])
+  clientId   String?
+  client     Client?  @relation(fields: [clientId], references: [id])
+  title      String
+  type       String
+  fileUrl    String
+  fileSize   Int?
+  uploadedBy String
+  uploadedAt DateTime @default(now())
+}
+
+model KmsArticle {
+  id        String      @id @default(cuid())
+  title     String
+  category  KmsCategory
+  content   String
+  fileUrl   String?
+  tags      String[]
+  createdBy String
+  creator   User        @relation(fields: [createdBy], references: [id])
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+// ─── SECURITY ───────────────────────────────────────────────
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  userEmail  String?
+  userName   String?
+  userRole   String?
+  action     String // LOGIN, LOGOUT, LOGIN_FAILED, VIEW, CREATE, UPDATE, DELETE, EXPORT, DOWNLOAD
+  resource   String // time_entry, client, matter, invoice, reimbursement, report, database
+  resourceId String?
+  detail     String?
+  ipAddress  String?
+  userAgent  String?
+  success    Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+}
+
+model LoginAttempt {
+  id        String   @id @default(cuid())
+  email     String
+  ipAddress String
+  success   Boolean
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([ipAddress])
+  @@index([createdAt])
+}
