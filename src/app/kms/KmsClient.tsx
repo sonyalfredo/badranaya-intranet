@@ -22,14 +22,14 @@ const CATEGORY_CONFIG = {
   PRECEDENT: { label: "Precedent", icon: History, color: "bg-green-100 text-green-700" },
 }
 
-const MOCK_ARTICLES: Article[] = []
+const ARTICLES: Article[] = []
 
 export default function KmsClient({ session }: { session: SessionUser }) {
   const [search, setSearch] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("")
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null)
   const [showForm, setShowForm] = useState(false)
-  const [articles, setArticles] = useState<Article[]>(MOCK_ARTICLES)
+  const [articles, setArticles] = useState<Article[]>(ARTICLES)
   const [form, setForm] = useState({ title: "", category: "TEMPLATE", content: "", tags: "" })
 
   const canCreate = ["PARTNER", "ASSOCIATE"].includes(session.role)

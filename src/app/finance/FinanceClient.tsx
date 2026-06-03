@@ -62,9 +62,9 @@ const STATUS_LABELS: Record<string, string> = {
   OVERDUE: "Due Date",
 }
 
-const MOCK_REIMBURSEMENTS: Reimbursement[] = []
+const REIMBURSEMENTS: Reimbursement[] = []
 
-const MOCK_INVOICES: Invoice[] = []
+const INVOICES: Invoice[] = []
 
 export default function FinanceClient({ session }: { session: SessionUser }) {
   const [tab, setTab] = useState<"reimbursement" | "invoice">("reimbursement")
@@ -73,9 +73,9 @@ export default function FinanceClient({ session }: { session: SessionUser }) {
   const canSubmitReimburse = ["PARTNER", "ASSOCIATE", "PARALEGAL"].includes(session.role)
 
   const [reimbursements, setReimbursements] = useState<Reimbursement[]>(
-    isManager ? MOCK_REIMBURSEMENTS : MOCK_REIMBURSEMENTS.filter((r) => r.userId === "u1")
+    isManager ? REIMBURSEMENTS : REIMBURSEMENTS.filter((r) => r.userId === "u1")
   )
-  const [invoices, setInvoices] = useState<Invoice[]>(MOCK_INVOICES)
+  const [invoices, setInvoices] = useState<Invoice[]>(INVOICES)
   const [showReimburseForm, setShowReimburseForm] = useState(false)
   const [showInvoiceForm, setShowInvoiceForm] = useState(false)
   const [reimburseForm, setReimburseForm] = useState({ category: "transport", amount: "", description: "", matterCode: "" })

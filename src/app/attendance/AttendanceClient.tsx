@@ -31,9 +31,9 @@ const STATUS_COLORS: Record<string, string> = {
   REJECTED: "bg-red-100 text-red-700",
 }
 
-const MOCK_ATTENDANCE: AttendanceRecord[] = []
+const ATTENDANCE_RECORDS: AttendanceRecord[] = []
 
-const MOCK_LEAVES: LeaveRequest[] = []
+const LEAVE_RECORDS: LeaveRequest[] = []
 
 export default function AttendanceClient({ session }: { session: SessionUser }) {
   const [tab, setTab] = useState<"attendance" | "leave">("attendance")
@@ -44,7 +44,7 @@ export default function AttendanceClient({ session }: { session: SessionUser }) 
   const [loading, setLoading] = useState(false)
   const [showLeaveForm, setShowLeaveForm] = useState(false)
   const [leaveForm, setLeaveForm] = useState({ type: "ANNUAL", startDate: "", endDate: "", reason: "" })
-  const [leaves, setLeaves] = useState<LeaveRequest[]>(MOCK_LEAVES)
+  const [leaves, setLeaves] = useState<LeaveRequest[]>(LEAVE_RECORDS)
   const [currentTime, setCurrentTime] = useState(new Date())
   const isManager = session.role === "PARTNER" || session.role === "ADMIN"
 
@@ -99,8 +99,8 @@ export default function AttendanceClient({ session }: { session: SessionUser }) 
     }
   }
 
-  const totalPresent = MOCK_ATTENDANCE.filter((a) => a.checkInAt && a.type !== "LEAVE").length
-  const totalLeave = MOCK_ATTENDANCE.filter((a) => a.type === "LEAVE").length
+  const totalPresent = ATTENDANCE_RECORDS.filter((a) => a.checkInAt && a.type !== "LEAVE").length
+  const totalLeave = ATTENDANCE_RECORDS.filter((a) => a.type === "LEAVE").length
 
   return (
     <div>
@@ -219,7 +219,7 @@ export default function AttendanceClient({ session }: { session: SessionUser }) 
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {MOCK_ATTENDANCE.map((rec) => {
+                {ATTENDANCE_RECORDS.map((rec) => {
                   const duration = rec.checkInAt && rec.checkOutAt
                     ? Math.round((new Date(rec.checkOutAt).getTime() - new Date(rec.checkInAt).getTime()) / 3600000 * 10) / 10
                     : null

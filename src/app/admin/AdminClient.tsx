@@ -16,7 +16,7 @@ interface Employee {
   isActive: boolean
 }
 
-const MOCK_EMPLOYEES: Employee[] = [
+const EMPLOYEES: Employee[] = [
   // Partners
   { id: "1", name: "Bhirawa Jayasidayatra Arifi", email: "bhirawa@badranayalaw.com", role: "PARTNER", position: "Managing Partner", phone: "081286931853", targetBillableHoursMonthly: 0, isActive: true },
   { id: "2", name: "Mangatta Toding Allo", email: "mangatta@badranayalaw.com", role: "PARTNER", position: "Partner", phone: "081182297721", targetBillableHoursMonthly: 0, isActive: true },
@@ -54,7 +54,7 @@ const ROLE_COLORS: Record<string, string> = {
 }
 
 export default function AdminClient({ session }: { session: SessionUser }) {
-  const [employees, setEmployees] = useState<Employee[]>(MOCK_EMPLOYEES)
+  const [employees, setEmployees] = useState<Employee[]>(EMPLOYEES)
   const [search, setSearch] = useState("")
   const [showForm, setShowForm] = useState(false)
   const [editEmployee, setEditEmployee] = useState<Employee | null>(null)

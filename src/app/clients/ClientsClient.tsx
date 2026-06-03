@@ -46,9 +46,9 @@ const STATUS_COLORS: Record<string, string> = {
   BILLED: "bg-purple-100 text-purple-700",
 }
 
-const MOCK_CLIENTS: Client[] = []
+const CLIENTS: Client[] = []
 
-const MOCK_MATTERS: Record<string, Matter[]> = {}
+const MATTERS: Record<string, Matter[]> = {}
 
 export default function ClientsClient({ session }: { session: SessionUser }) {
   const [search, setSearch] = useState("")
@@ -56,7 +56,7 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
   const [selectedClient, setSelectedClient] = useState<Client | null>(null)
   const [showNewClientForm, setShowNewClientForm] = useState(false)
   const [showNewMatterForm, setShowNewMatterForm] = useState(false)
-  const [clients, setClients] = useState<Client[]>(MOCK_CLIENTS)
+  const [clients, setClients] = useState<Client[]>(CLIENTS)
   const [clientForm, setClientForm] = useState({ companyName: "", picName: "", picEmail: "", picPhone: "", industry: "", notes: "" })
   const [matterForm, setMatterForm] = useState({ matterName: "", practiceArea: "LITIGATION", description: "" })
 
@@ -82,7 +82,7 @@ export default function ClientsClient({ session }: { session: SessionUser }) {
     setClientForm({ companyName: "", picName: "", picEmail: "", picPhone: "", industry: "", notes: "" })
   }
 
-  const matters = selectedClient ? (MOCK_MATTERS[selectedClient.id] ?? []) : []
+  const matters = selectedClient ? (MATTERS[selectedClient.id] ?? []) : []
 
   return (
     <div>

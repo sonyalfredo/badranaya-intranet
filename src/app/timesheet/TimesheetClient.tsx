@@ -16,9 +16,9 @@ interface TimeEntry {
   status: "DRAFT" | "SUBMITTED" | "APPROVED" | "REJECTED"
 }
 
-const MOCK_MATTERS: { id: string; matterCode: string; matterName: string; clientName: string }[] = []
+const MATTERS: { id: string; matterCode: string; matterName: string; clientName: string }[] = []
 
-const MOCK_ENTRIES: TimeEntry[] = []
+const ENTRIES: TimeEntry[] = []
 
 const STATUS_LABELS: Record<string, string> = {
   DRAFT: "Draft",
@@ -35,7 +35,7 @@ const STATUS_COLORS: Record<string, string> = {
 }
 
 export default function TimesheetClient({ session }: { session: SessionUser }) {
-  const [entries, setEntries] = useState<TimeEntry[]>(MOCK_ENTRIES)
+  const [entries, setEntries] = useState<TimeEntry[]>(ENTRIES)
   const [showForm, setShowForm] = useState(false)
   const [timerRunning, setTimerRunning] = useState(false)
   const [timerSeconds, setTimerSeconds] = useState(0)
@@ -79,7 +79,7 @@ export default function TimesheetClient({ session }: { session: SessionUser }) {
   }
 
   function handleSubmitEntry(status: "DRAFT" | "SUBMITTED") {
-    const matter = MOCK_MATTERS.find((m) => m.id === form.matterId)
+    const matter = MATTERS.find((m) => m.id === form.matterId)
     if (!matter || !form.hours || !form.description) return
     const newEntry: TimeEntry = {
       id: Date.now().toString(),
@@ -138,14 +138,14 @@ export default function TimesheetClient({ session }: { session: SessionUser }) {
                 onChange={(e) => { setTimerMatter(e.target.value); setForm((f) => ({ ...f, matterId: e.target.value })) }}
                 className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400/50 bg-gray-50">
                 <option value="">Select matter...</option>
-                {MOCK_MATTERS.map((m) => <option key={m.id} value={m.id}>{m.matterCode} — {m.matterName}</option>)}
+                {MATTERS.map((m) => <option key={m.id} value={m.id}>{m.matterCode} — {m.matterName}</option>)}
               </select>
             </div>
           )}
           <div className="text-center my-2">
             <p className="text-3xl font-mono font-bold text-gray-900">{formatTimer(timerSeconds)}</p>
             {timerRunning && timerMatter && (
-              <p className="text-xs text-gray-400 mt-1">{MOCK_MATTERS.find((m) => m.id === timerMatter)?.matterCode}</p>
+              <p className="text-xs text-gray-400 mt-1">{MATTERS.find((m) => m.id === timerMatter)?.matterCode}</p>
             )}
           </div>
           <div className="flex gap-2 mt-3">
@@ -177,7 +177,7 @@ export default function TimesheetClient({ session }: { session: SessionUser }) {
               <select value={form.matterId} onChange={(e) => setForm((f) => ({ ...f, matterId: e.target.value }))}
                 className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400/50 bg-gray-50">
                 <option value="">Select matter...</option>
-                {MOCK_MATTERS.map((m) => <option key={m.id} value={m.id}>{m.matterCode} — {m.matterName}</option>)}
+                {MATTERS.map((m) => <option key={m.id} value={m.id}>{m.matterCode} — {m.matterName}</option>)}
               </select>
             </div>
             <div>
